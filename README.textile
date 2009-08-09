@@ -40,5 +40,3 @@ first param is path to rrd db
 2nd param will return data string of 123:456:1234 (each value is sanitized, only numeric values accepted)
 
 to be passed as the data values to be passed to the db
-
-N specifies the current time (NOW)
