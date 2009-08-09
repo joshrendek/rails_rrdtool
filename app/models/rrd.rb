@@ -29,7 +29,7 @@ class RRD
     end
   end
 
-  def self.create(path,params)
+  def self.create(path,params,rrdpath="rrdtool")
     # example usage:
     # RRD.create('/test.rrd', {:step => 300, :heartbeat => 600,
     # :ds => [  {:name => "test", :type => "GAUGE"}, {:name => "josh", :type => "GAUGE"} ]  ,
@@ -41,7 +41,7 @@ class RRD
 	puts "Creating RRD graph"
     puts "Step: " + self.sanitize(params[:step], 'num')
     begin
-      cmd = "rrdtool create #{self.sanitize(path, 'path')} --step #{self.sanitize(params[:step], 'num')} "
+      cmd = "#{rrdpath} create #{self.sanitize(path, 'path')} --step #{self.sanitize(params[:step], 'num')} "
 
       for p in params[:ds]
         cmd <<  "DS:#{p[:name]}:#{self.sanitize(p[:type], 'ds_type')}:#{self.sanitize(params[:heartbeat], 'num')}:0:U "
@@ -59,7 +59,7 @@ class RRD
     end
   end
 
-  def self.update(path, params)
+  def self.update(path, params,rrdpath="rrdtool")
     # example usage:
     # RRD.update('/test/path.rrd', ["123", "456a", 1234])
     # first param is path to rrd db
@@ -72,7 +72,7 @@ class RRD
       sanitized = []
       params.collect { |p| sanitized << self.sanitize(p, 'num') }
       vals = sanitized.join(":")
-      cmd = "rrdtool update #{self.sanitize(path, 'path')} N:#{vals}"
+      cmd = "#{rrdpath} update #{self.sanitize(path, 'path')} N:#{vals}"
     rescue RuntimeError => e
       puts "RRD failed to update: #{e}"
     else
@@ -81,7 +81,7 @@ class RRD
     end
   end
 
-  def self.graph(path,image_path,params)
+  def self.graph(path,image_path,params,rrdpath="rrdtool")
     # variables for DEF's are taken care of programatically
 
     # required params
@@ -102,7 +102,7 @@ class RRD
     # :upperlimit
 
     begin
-      cmd = "rrdtool graph #{self.sanitize(image_path, 'path')} "
+      cmd = "#{rrdpath} graph #{self.sanitize(image_path, 'path')} "
       cmd << "-s #{self.sanitize(params[:ago].tv_sec, 'num')} "
       cmd << "-w #{self.sanitize(params[:width], 'num')} -h #{self.sanitize(params[:height], 'num')} "
       cmd << "-a #{self.sanitize(params[:image_type], 'imagetype')} "
