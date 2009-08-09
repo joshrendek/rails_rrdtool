@@ -18,10 +18,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="rrd.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="6" selection-start="418" selection-end="418" vertical-scroll-proportion="0.24561404">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rrd.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/rrd.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="0" selection-start="2985" selection-end="2985" vertical-scroll-proportion="1.9613734">
+            <state line="35" column="79" selection-start="1060" selection-end="1701" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -193,7 +202,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/models/rrd.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="2985" selection-end="2985" vertical-scroll-proportion="1.9613734">
+        <state line="35" column="79" selection-start="1060" selection-end="1701" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="6" selection-start="418" selection-end="418" vertical-scroll-proportion="0.24561404">
           <folding />
         </state>
       </provider>
