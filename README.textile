@@ -62,12 +62,12 @@ _*Required params*_
 :width, :height
 :image_type
 :title
-:defs => array of hashes
-        * * [:defs][:key] => The DB data key
-        * * [:defs][:type] => RRA Type
-        * * [:defs][:rpn] => RPN Type
-        * * [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
-        * * [:defs][:title] => Title for this DEF
+    :defs => array of hashes
+        * [:defs][:key] => The DB data key
+        * [:defs][:type] => RRA Type
+        * [:defs][:rpn] => RPN Type
+        * [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
+        * [:defs][:title] => Title for this DEF
 _*Optional params*_
 :base
 :vlabel
