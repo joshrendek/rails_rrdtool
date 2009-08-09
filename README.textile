@@ -57,18 +57,18 @@ second param is path to store graphed image
 third is hash of params
 
 variables for DEF's are taken care of programatically
-_Required params_
+_*Required params*_
 :ago is when to start from, a Time object ( Time.now )
 :width, :height
 :image_type
 :title
 :defs => array of hashes
-    # [:defs][:key] => The DB data key
-    # [:defs][:type] => RRA Type
-    # [:defs][:rpn] => RPN Type
-    # [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
-    # [:defs][:title] => Title for this DEF
-_Optional params_
+        * [:defs][:key] => The DB data key
+        * [:defs][:type] => RRA Type
+        * [:defs][:rpn] => RPN Type
+        * [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
+        * [:defs][:title] => Title for this DEF
+_*Optional params*_
 :base
 :vlabel
 :lowerlimit
