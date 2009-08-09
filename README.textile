@@ -14,7 +14,10 @@ example usage:
 </code>
 </pre>
 
-    first value is a path to the rrd db, the 2nd param is a hash of keys and values
-    :ds is an array containing hashes for each DataSource (DS) type in the db
-    :xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
-    :rra is a array containing hashes with RRA types and corresponding values
+first value is a path to the rrd db, the 2nd param is a hash of keys and values
+
+:ds is an array containing hashes for each DataSource (DS) type in the db
+
+:xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
+
+:rra is a array containing hashes with RRA types and corresponding values
