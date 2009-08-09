@@ -21,3 +21,20 @@ first value is a path to the rrd db, the 2nd param is a hash of keys and values
 :xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
 
 :rra is a array containing hashes with RRA types and corresponding values
+
+h2. Updating a RRD
+
+RRD.update(path,params)
+
+<pre>
+<code>
+ RD.update('/test/path.rrd', ["123", "456", 1234])
+</code>
+</pre>
+
+# example usage:
+    # RRD.update('/test/path.rrd', ["123", "456a", 1234])
+    # first param is path to rrd db
+    # 2nd param will return data string of 123:456:1234 (each value is sanitized, only numeric values accepted)
+    # to be passed as the data values to be passed to the db
+    # N specifies the current time (NOW)

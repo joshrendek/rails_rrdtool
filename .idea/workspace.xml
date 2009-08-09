@@ -21,7 +21,7 @@
       <file leaf-file-name="rrd.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/rrd.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="79" selection-start="1060" selection-end="1701" vertical-scroll-proportion="0.0">
+            <state line="63" column="42" selection-start="2441" selection-end="2765" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -30,7 +30,7 @@
       <file leaf-file-name="README.textile" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.textile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="0.6754386">
+            <state line="34" column="1" selection-start="894" selection-end="894" vertical-scroll-proportion="0.6622807">
               <folding />
             </state>
           </provider>
@@ -202,14 +202,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/models/rrd.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="79" selection-start="1060" selection-end="1701" vertical-scroll-proportion="0.0">
+        <state line="63" column="42" selection-start="2441" selection-end="2765" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.textile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="0.6754386">
+        <state line="34" column="1" selection-start="894" selection-end="894" vertical-scroll-proportion="0.6622807">
           <folding />
         </state>
       </provider>
