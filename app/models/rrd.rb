@@ -9,13 +9,17 @@ class RRD
     if type == 'num' # 0-9 and . (accepted: 1.5, 10, 234)
        str = string.to_s.match( /[0-9.]+/ )[0]
     elsif type == 'alphanum' # alpha numeric only (accepted: abc123, abc, 123)
-       str = string.to_s.match( /[a-zA-Z0-9]+/ )[0]
+       str = string.to_s.match( /[a-zA-Z0-9\s]+/ )[0]
     elsif type == 'ds_type' # only DS types (accepted values are GAUGE, COUNTER, DERIVE, ABSOLUTE, and COMPUTE
        str = string.to_s.match( /(GAUGE|COUNTER|DERIVE|ABSOLUTE|COMPUTE)/ )[0]
     elsif type == 'rra_type' # only RRA types (accepted values are AVERAGE, MIN, MAX, LAST
        str = string.to_s.match( /(AVERAGE|MIN|MAX|LAST)/ )[0]
     elsif type == 'path' # sanitizes the PATH of the RRD db will match test.rrd and /path/test.rrd
        str = string.to_s.match("^(/|){1}(((/{1}\.{1})?[a-zA-Z0-9 ]+/?)+(\.{1}[a-zA-Z0-9]{2,4})?)$")
+    elsif type == 'imagetype'
+       str = string.to_s.match(/(PNG|SVG|EPS|PDF)/)[0] #[-a|--imgformat PNG|SVG|EPS|PDF]
+    elsif type == 'rpn'
+       str = string.to_s.match(/(PRINT|GPRINT|COMMENT|VRULE|HRULE|LINE|AREA|TICK|SHIFT|TEXTALIGN|STACK)/)[0]
     end  
 
     if str.nil?
@@ -64,9 +68,67 @@ class RRD
     # N specifies the current time (NOW)
 
     # sanitize the params
-    sanitized = []
-    params.collect { |p| sanitized << self.sanitize(p, 'num') }
-    vals = sanitized.join(":")
-    cmd = "rrdtool update #{self.sanitize(path, 'path')} N:#{vals}"
+    begin
+      sanitized = []
+      params.collect { |p| sanitized << self.sanitize(p, 'num') }
+      vals = sanitized.join(":")
+      cmd = "rrdtool update #{self.sanitize(path, 'path')} N:#{vals}"
+    rescue RuntimeError => e
+      puts "RRD failed to update: #{e}"
+    else
+      puts "Running RRD command"
+      return cmd
+    end
+  end
+
+  def self.graph(path,image_path,params)
+    # variables for DEF's are taken care of programatically
+
+    # required params
+    # :ago is when to start from, a Time object ( Time.now )
+    # :width, :height
+    # :image_type
+    # :title
+    # :defs => array of hashes
+    # # [:defs][:key] => The DB data key
+    # # [:defs][:type] => RRA Type
+    # # [:defs][:rpn] => RPN Type
+    # # [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
+    # # [:defs][:title] => Title for this DEF
+    # optional params
+    # :base
+    # :vlabel
+    # :lowerlimit
+    # :upperlimit
+
+    begin
+      cmd = "rrdtool graph #{self.sanitize(image_path, 'path')} "
+      cmd << "-s #{self.sanitize(params[:ago].tv_sec, 'num')} "
+      cmd << "-w #{self.sanitize(params[:width], 'num')} -h #{self.sanitize(params[:height], 'num')} "
+      cmd << "-a #{self.sanitize(params[:image_type], 'imagetype')} "
+      cmd << "-t '#{self.sanitize(params[:title], 'alphanum')}' "
+
+      abet = "abcdefghijklmnaopqrstuvwxyzABCDEFGHIJKLMNAOPQRSTUVWXYZ".split('')
+      # do optionals
+      params[:base] ? cmd << " --base=#{self.sanitize(params[:base], 'num')} " : ""
+      params[:vlabel] ? cmd << " -v='#{self.sanitize(params[:vlabel], 'alphanum')}' " : ""
+      params[:lowerlimit] ? cmd << " --lower-limit=#{self.sanitize(params[:lowerlimit], 'num')} " : ""
+      params[:upperlimit] ? cmd << " --upper-limit=#{self.sanitize(params[:upperlimit], 'num')} " : ""
+
+      # load defs
+      i = 0
+      for d in params[:defs]
+        d_key = abet[i]
+        cmd << "DEF:#{d_key}='#{self.sanitize(path, 'path')}':#{self.sanitize(d[:key], 'alphanum')}:"
+        cmd << "#{self.sanitize(d[:type], 'rra_type')} #{self.sanitize(d[:rpn], 'rpn')}:#{d_key}"
+        cmd << "##{self.sanitize(d[:color], 'alphanum')}:'#{self.sanitize(d[:title], 'alphanum')}'"
+        i+=1
+      end
+    rescue RuntimeError => e
+      puts "RRD failed to graph: #{e}"
+    else
+      puts "Running RRD command"
+      return cmd
+    end
   end
 end

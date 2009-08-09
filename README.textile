@@ -40,3 +40,36 @@ first param is path to rrd db
 2nd param will return data string of 123:456:1234 (each value is sanitized, only numeric values accepted)
 
 to be passed as the data values to be passed to the db
+
+h2. Graphing a RRD
+
+example usage:
+<pre>
+<code>
+ RRD.graph('/test/path.rrd','/test/path.png', {:ago => Time.now.advance(:hours => -12), :width => 500, :height => 200, :image_type => "PNG", :title => "Memory 12hr test", :defs => [ {:key => "free", :type => "AVERAGE", :rpn => "AREA", :color => "C32227", :title => "Free Memory" }, {:key => "used", :type => "AVERAGE", :rpn => "AREA", :color => "932D0C", :title => "Used Memory" } ] , :base => 1024, :vlabel => "gb", :lowerlimit => 0})
+</code>
+</pre>
+
+first param is path to rrd
+
+second param is path to store graphed image
+
+third is hash of params
+
+variables for DEF's are taken care of programatically
+_Required params_
+:ago is when to start from, a Time object ( Time.now )
+:width, :height
+:image_type
+:title
+:defs => array of hashes
+    # [:defs][:key] => The DB data key
+    # [:defs][:type] => RRA Type
+    # [:defs][:rpn] => RPN Type
+    # [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
+    # [:defs][:title] => Title for this DEF
+_Optional params_
+:base
+:vlabel
+:lowerlimit
+:upperlimit
