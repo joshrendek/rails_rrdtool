@@ -1,11 +1,8 @@
 h1. "Installing rails_rrdtool"
-
 cd vendor/plugins && git clone git://github.com/bluescripts/rails_rrdtool.git rails_rrdtool
 
 h1. "Usage"
-
 h2. "Creating a RRD"
-
 RRD.create(path,params)
 example usage:
 RRD.create('/test.rrd', {:step => 300, :heartbeat => 600, :ds => [  {:name => "test", :type => "GAUGE"}, {:name => "josh", :type => "GAUGE"} ]  , :xff => ".5", :rra => [ {:type => "max", :steps => 20, :rows => 1} ] })
