@@ -2,242 +2,71 @@ class RRD
   def self.test
 	puts "test"
   end
+
+  def self.sanitize(string,type)
+    # types are alphanum, num, graph, ds_type, rra_type, path
+    str = ""
+    if type == 'num' # 0-9 and . (accepted: 1.5, 10, 234)
+       str = string.to_s.match( /[0-9.]+/ )[0]
+    elsif type == 'alphanum' # alpha numeric only (accepted: abc123, abc, 123)
+       str = string.to_s.match( /[a-zA-Z0-9]+/ )[0]
+    elsif type == 'ds_type' # only DS types (accepted values are GAUGE, COUNTER, DERIVE, ABSOLUTE, and COMPUTE
+       str = string.to_s.match( /(GAUGE|COUNTER|DERIVE|ABSOLUTE|COMPUTE)/ )[0]
+    elsif type == 'rra_type' # only RRA types (accepted values are AVERAGE, MIN, MAX, LAST
+       str = string.to_s.match( /(AVERAGE|MIN|MAX|LAST)/ )[0]
+    elsif type == 'path' # sanitizes the PATH of the RRD db will match test.rrd and /path/test.rrd
+       str = string.to_s.match("^(/|){1}(((/{1}\.{1})?[a-zA-Z0-9 ]+/?)+(\.{1}[a-zA-Z0-9]{2,4})?)$")
+    end  
+
+    if str.nil?
+      raise "No match was returned when matching #{type}"
+    else
+      return str
+    end
+  end
+
   def self.create(path,params)
+    # example usage:
+    # RRD.create('/test.rrd', {:step => 300, :heartbeat => 600,
+    # :ds => [  {:name => "test", :type => "GAUGE"}, {:name => "josh", :type => "GAUGE"} ]  ,
+    # :xff => ".5", :rra => [ {:type => "max", :steps => 20, :rows => 1} ] })
+    # first value is a path to the rrd db, the 2nd param is a hash of keys and values
+    # :ds is an array containing hashes for each DataSource (DS) type in the db
+    # :xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
+    # :rra is a array containing hashes with RRA types and corresponding values
 	puts "Creating RRD graph"
-    puts "Step: #{params[:step]}"
+    puts "Step: " + self.sanitize(params[:step], 'num')
+    begin
+      cmd = "rrdtool create #{self.sanitize(path, 'path')} --step #{self.sanitize(params[:step], 'num')} "
 
-    cmd = "rrdtool create #{path} --step #{params[:step].to_i} "
+      for p in params[:ds]
+        cmd <<  "DS:#{p[:name]}:#{self.sanitize(p[:type], 'ds_type')}:#{self.sanitize(params[:heartbeat], 'num')}:0:U "
+      end
 
-    for p in params[:ds]
-      cmd <<  "DS:#{p[:name]}:#{p[:type]}:#{params[:heartbeat]}:0:U "
+      xff = self.sanitize(params[:xff], 'num')
+      for r in params[:rra]
+        cmd << "RRA:#{r[:type].upcase}:#{xff}:#{self.sanitize(r[:steps], 'num')}:#{self.sanitize(r[:rows], 'num')}"
+      end
+    rescue RuntimeError => e
+      puts "RRD failed to create: #{e}"
+    else
+      puts "Running RRD command"
+      return cmd
     end
+  end
 
-    xff = params[:xff]
-    for r in params[:rra]
-      cmd << "RRA:#{r[:type].upcase}:#{xff}:#{r[:steps]}:#{r[:rows]}"
-    end
-    
-    puts cmd
+  def self.update(path, params)
+    # example usage:
+    # RRD.update('/test/path.rrd', ["123", "456a", 1234])
+    # first param is path to rrd db
+    # 2nd param will return data string of 123:456:1234 (each value is sanitized, only numeric values accepted)
+    # to be passed as the data values to be passed to the db
+    # N specifies the current time (NOW)
+
+    # sanitize the params
+    sanitized = []
+    params.collect { |p| sanitized << self.sanitize(p, 'num') }
+    vals = sanitized.join(":")
+    cmd = "rrdtool update #{self.sanitize(path, 'path')} N:#{vals}"
   end
 end
-
-##!/bin/sh
-#
-#NOW=`date +%s`
-#
-#
-#DBFILE=/home/servly/rrd/$1_cpu.rrd
-#
-#if [ -e "$DBFILE" ]
-#then
-#        echo "file exists: $DBFILE"
-#else
-#        rrdtool create $DBFILE --step 300 \
-#                DS:user:GAUGE:600:0:U \
-#                DS:idle:GAUGE:600:0:U \
-#                RRA:AVERAGE:0.5:1:10080 \
-#                RRA:MAX:0.5:60:1 \
-#                RRA:MAX:0.5:180:1 \
-#                RRA:MAX:0.5:360:1 \
-#                RRA:MAX:0.5:720:1 \
-#                RRA:MAX:0.5:1440:1 \
-#                RRA:MAX:0.5:2880:1 \
-#                RRA:MAX:0.5:4320:1 \
-#                RRA:MAX:0.5:10080:1
-#
-#        echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
-#
-#DBFILE=/home/servly/rrd/$1_disk.rrd
-#
-#if [ -e "$DBFILE" ]
-#then
-#        echo "file exists: $DBFILE"
-#else
-#        rrdtool create $DBFILE -s 300 \
-#                DS:used:GAUGE:600:0:U \
-#                DS:avail:GAUGE:600:0:U \
-#                RRA:AVERAGE:0.5:1:10080 \
-#                RRA:MIN:0.5:60:1 \
-#                RRA:MAX:0.5:60:1 \
-#                RRA:MIN:0.5:180:1 \
-#                RRA:MAX:0.5:180:1 \
-#                RRA:MIN:0.5:360:1 \
-#                RRA:MAX:0.5:360:1 \
-#                RRA:MIN:0.5:720:1 \
-#                RRA:MAX:0.5:720:1 \
-#                RRA:MIN:0.5:1440:1 \
-#                RRA:MAX:0.5:1440:1 \
-#                RRA:MIN:0.5:2880:1 \
-#                RRA:MAX:0.5:2880:1 \
-#                RRA:MIN:0.5:4320:1 \
-#                RRA:MAX:0.5:4320:1 \
-#                RRA:MIN:0.5:10080:1 \
-#                RRA:MAX:0.5:10080:1
-#
-#        echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
-#
-#DBFILE=/home/servly/rrd/$1_mem.rrd
-#
-#NOW=`date +%s`
-#
-#if [ -e "$DBFILE" ]
-#then
-#	echo "file exists: $DBFILE"
-#else
-#	rrdtool create $DBFILE -s 300 -b N \
-#		DS:used:GAUGE:600:U:U \
-#		DS:free:GAUGE:600:U:U \
-#		DS:buffers:GAUGE:600:U:U \
-#		DS:cached:GAUGE:600:U:U \
-#		RRA:AVERAGE:0.5:1:10080 \
-#		RRA:MAX:0.5:60:1 \
-#		RRA:MAX:0.5:180:1 \
-#		RRA:MAX:0.5:360:1 \
-#		RRA:MAX:0.5:720:1 \
-#		RRA:MAX:0.5:1440:1 \
-#		RRA:MAX:0.5:2880:1 \
-#		RRA:MAX:0.5:4320:1 \
-#		RRA:MAX:0.5:10080:1
-#
-#	echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
-#
-#DBFILE=/home/servly/rrd/$1_mem2.rrd
-#
-#NOW=`date +%s`
-#
-#
-#
-#if [ -e "$DBFILE" ]
-#then
-#        echo "file exists: $DBFILE"
-#else
-#        rrdtool create $DBFILE -s 300 -b N \
-#                DS:realmemusage:GAUGE:600:U:U \
-#                RRA:AVERAGE:0.5:1:10080 \
-#                RRA:MIN:0.5:60:1 \
-#                RRA:MAX:0.5:60:1 \
-#                RRA:MIN:0.5:180:1 \
-#                RRA:MAX:0.5:180:1 \
-#                RRA:MIN:0.5:360:1 \
-#                RRA:MAX:0.5:360:1 \
-#                RRA:MIN:0.5:720:1 \
-#                RRA:MAX:0.5:720:1 \
-#                RRA:MIN:0.5:1440:1 \
-#                RRA:MAX:0.5:1440:1 \
-#                RRA:MIN:0.5:2880:1 \
-#                RRA:MAX:0.5:2880:1 \
-#                RRA:MIN:0.5:4320:1 \
-#                RRA:MAX:0.5:4320:1 \
-#                RRA:MIN:0.5:10080:1 \
-#
-#        echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
-#
-#DBFILE=/home/servly/rrd/$1_net.rrd
-#
-#NOW=`date +%s`
-#
-#if [ -e "$DBFILE" ]
-#then
-#        echo "file exists: $DBFILE"
-#else
-#        rrdtool create $DBFILE -s 300 \
-#                DS:in:COUNTER:600:U:U \
-#                DS:out:COUNTER:600:U:U \
-#                RRA:AVERAGE:0.5:1:4320  \
-#                RRA:AVERAGE:0.5:60:72   \
-#                RRA:AVERAGE:0.5:180:24  \
-#                RRA:AVERAGE:0.5:360:12  \
-#                RRA:AVERAGE:0.5:720:6   \
-#                RRA:AVERAGE:0.5:1440:3  \
-#                RRA:AVERAGE:0.5:2880:2  \
-#                RRA:AVERAGE:0.5:4320:1  \
-#                RRA:AVERAGE:0.5:10080:1 \
-#                RRA:MAX:0.5:60:1 \
-#                RRA:MAX:0.5:180:1 \
-#                RRA:MAX:0.5:360:1 \
-#                RRA:MAX:0.5:720:1 \
-#                RRA:MAX:0.5:1440:1 \
-#                RRA:MAX:0.5:2880:1 \
-#                RRA:MAX:0.5:4320:1 \
-#                RRA:MAX:0.5:10080:1
-#        echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
-#
-#DBFILE=/home/servly/rrd/$1_processes.rrd
-#
-#NOW=`date +%s`
-#
-#if [ -e "$DBFILE" ]
-#then
-#        echo "file exists: $DBFILE"
-#else
-#
-#        rrdtool create $DBFILE --step 300 \
-#                DS:processes:GAUGE:600:U:U \
-#                RRA:AVERAGE:0.5:1:10080 \
-#                RRA:MIN:0.5:60:1 \
-#                RRA:MAX:0.5:60:1 \
-#                RRA:MIN:0.5:180:1 \
-#                RRA:MAX:0.5:180:1 \
-#                RRA:MIN:0.5:360:1 \
-#                RRA:MAX:0.5:360:1 \
-#                RRA:MIN:0.5:720:1 \
-#                RRA:MAX:0.5:720:1 \
-#                RRA:MIN:0.5:1440:1 \
-#                RRA:MAX:0.5:1440:1 \
-#                RRA:MIN:0.5:2880:1 \
-#                RRA:MAX:0.5:2880:1 \
-#                RRA:MIN:0.5:4320:1 \
-#                RRA:MAX:0.5:4320:1 \
-#                RRA:MIN:0.5:10080:1 \
-#                RRA:MAX:0.5:10080:1
-#
-#        echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
-#
-#DBFILE=/home/servly/rrd/$1_load.rrd
-#
-#if [ -e "$DBFILE" ]
-#then
-#	echo "file exists: $DBFILE"
-#else
-#
-#	rrdtool create $DBFILE --step 300 \
-#		DS:load:GAUGE:600:U:U \
-#        RRA:AVERAGE:0.5:1:10080 \
-#		RRA:MAX:0.5:60:1 \
-#		RRA:MIN:0.5:180:1 \
-#       	RRA:MAX:0.5:180:1 \
-#        RRA:MIN:0.5:360:1 \
-#        RRA:MAX:0.5:360:1 \
-#        RRA:MIN:0.5:720:1 \
-#        RRA:MAX:0.5:720:1 \
-#        RRA:MIN:0.5:1440:1 \
-#        RRA:MAX:0.5:1440:1 \
-#        RRA:MIN:0.5:2880:1 \
-#        RRA:MAX:0.5:2880:1 \
-#        RRA:MIN:0.5:4320:1 \
-#        RRA:MAX:0.5:4320:1 \
-#        RRA:MIN:0.5:10080:1 \
-#        RRA:MAX:0.5:10080:1
-#
-#	echo "file created: $DBFILE"
-#fi
-#
-#chmod 777 $DBFILE
