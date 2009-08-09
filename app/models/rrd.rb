@@ -49,12 +49,14 @@ class RRD
 
       xff = self.sanitize(params[:xff], 'num')
       for r in params[:rra]
-        cmd << "RRA:#{r[:type].upcase}:#{xff}:#{self.sanitize(r[:steps], 'num')}:#{self.sanitize(r[:rows], 'num')}"
+        cmd << "RRA:#{r[:type].upcase}:#{xff}:#{self.sanitize(r[:steps], 'num')}:#{self.sanitize(r[:rows], 'num')} "
       end
     rescue RuntimeError => e
       puts "RRD failed to create: #{e}"
     else
       puts "Running RRD command"
+
+      system(cmd)
       return cmd
     end
   end
@@ -77,6 +79,7 @@ class RRD
       puts "RRD failed to update: #{e}"
     else
       puts "Running RRD command"
+      system(cmd)
       return cmd
     end
   end
@@ -121,13 +124,14 @@ class RRD
         d_key = abet[i]
         cmd << "DEF:#{d_key}='#{self.sanitize(path, 'path')}':#{self.sanitize(d[:key], 'alphanum')}:"
         cmd << "#{self.sanitize(d[:type], 'rra_type')} #{self.sanitize(d[:rpn], 'rpn')}:#{d_key}"
-        cmd << "##{self.sanitize(d[:color], 'alphanum')}:'#{self.sanitize(d[:title], 'alphanum')}'"
+        cmd << "##{self.sanitize(d[:color], 'alphanum')}:'#{self.sanitize(d[:title], 'alphanum')}' "
         i+=1
       end
     rescue RuntimeError => e
       puts "RRD failed to graph: #{e}"
     else
       puts "Running RRD command"
+      system(cmd)
       return cmd
     end
   end
