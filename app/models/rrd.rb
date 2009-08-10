@@ -20,6 +20,11 @@ class RRD
        str = string.to_s.match(/(PNG|SVG|EPS|PDF)/)[0] #[-a|--imgformat PNG|SVG|EPS|PDF]
     elsif type == 'rpn'
        str = string.to_s.match(/(PRINT|GPRINT|COMMENT|VRULE|HRULE|LINE|AREA|TICK|SHIFT|TEXTALIGN|STACK)/)[0]
+    elsif type == 'color'
+      # ACK ground, CANVAS, SHADEA left/top border,
+      #SHADEB right/bottom border, GRID, MGRID major grid,
+      # FONT, FRAME and axis of the graph or ARROW.
+       str = string.to_s.match(/(BACK|CANVAS|SHADEA|SHADEB|GRID|MGRIF|FONT|FRAME|ARROW)/)[0]
     end  
 
     if str.nil?
@@ -119,7 +124,9 @@ class RRD
       params[:lowerlimit] ? cmd << " --lower-limit=#{self.sanitize(params[:lowerlimit], 'num')} " : ""
       params[:upperlimit] ? cmd << " --upper-limit=#{self.sanitize(params[:upperlimit], 'num')} " : ""
       if params[:color]
-         cmd << " --color CANVAS##{self.sanitize(params[:color], 'alphanum')} "
+         for c in params[:color]
+          cmd << " --color #{self.sanitize(c[:type], 'color')}##{self.sanitize(c[:color], 'alphanum')} "
+         end
       end
       # load defs
       i = 0
