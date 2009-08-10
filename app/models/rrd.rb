@@ -103,6 +103,7 @@ class RRD
     # :vlabel
     # :lowerlimit
     # :upperlimit
+    # :background --background
 
     begin
       cmd = "#{rrdpath} graph #{self.sanitize(image_path, 'path')} "
@@ -117,7 +118,7 @@ class RRD
       params[:vlabel] ? cmd << " -v='#{self.sanitize(params[:vlabel], 'alphanum')}' " : ""
       params[:lowerlimit] ? cmd << " --lower-limit=#{self.sanitize(params[:lowerlimit], 'num')} " : ""
       params[:upperlimit] ? cmd << " --upper-limit=#{self.sanitize(params[:upperlimit], 'num')} " : ""
-
+      params[:background] ? cmd << " --background ##{self.sanitize(params[:background], 'alphanum')} " : ""
       # load defs
       i = 0
       for d in params[:defs]
