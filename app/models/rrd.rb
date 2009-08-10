@@ -118,7 +118,9 @@ class RRD
       params[:vlabel] ? cmd << " -v='#{self.sanitize(params[:vlabel], 'alphanum')}' " : ""
       params[:lowerlimit] ? cmd << " --lower-limit=#{self.sanitize(params[:lowerlimit], 'num')} " : ""
       params[:upperlimit] ? cmd << " --upper-limit=#{self.sanitize(params[:upperlimit], 'num')} " : ""
-      params[:background] ? cmd << " --background ##{self.sanitize(params[:background], 'alphanum')} " : ""
+      if params[:color]
+         cmd << " --color CANVAS##{self.sanitize(params[:color], 'alphanum')} "
+      end
       # load defs
       i = 0
       for d in params[:defs]
