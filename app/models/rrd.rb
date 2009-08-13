@@ -9,7 +9,7 @@ class RRD
     if type == 'num' # 0-9 and . (accepted: 1.5, 10, 234)
        str = string.to_s.match( /[0-9.]+/ )[0]
     elsif type == 'alphanum' # alpha numeric only (accepted: abc123, abc, 123)
-       str = string.to_s.match( /[a-zA-Z0-9\s]+/ )[0]
+       str = string.to_s.match( /[a-zA-Z0-9_\s]+/ )[0]
     elsif type == 'ds_type' # only DS types (accepted values are GAUGE, COUNTER, DERIVE, ABSOLUTE, and COMPUTE
        str = string.to_s.match( /(GAUGE|COUNTER|DERIVE|ABSOLUTE|COMPUTE)/ )[0]
     elsif type == 'rra_type' # only RRA types (accepted values are AVERAGE, MIN, MAX, LAST
