@@ -59,7 +59,8 @@ class RRD
     rescue RuntimeError => e
       puts "RRD failed to create: #{e}"
     else
-      puts "Running RRD command"
+      cmd << " & "
+      puts "Running RRD command: #{cmd}"
 
       system(cmd)
       return cmd
@@ -140,7 +141,8 @@ class RRD
     rescue RuntimeError => e
       puts "RRD failed to graph: #{e}"
     else
-      puts "Running RRD command"
+      cmd << " & "
+      puts "Running RRD command: #{cmd}"
       system(cmd)
       return cmd
     end
