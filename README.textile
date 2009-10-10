@@ -50,11 +50,9 @@ RRD.create(path,params)
 
 example usage:
 <pre>
-<code>
  RRD.create('/test.rrd', {:step => 300, :heartbeat => 600, :ds => [  {:name => "test", :type => "GAUGE"},
  {:name => "josh", :type => "GAUGE"} ]  , :xff => ".5",
  :rra => [ {:type => "max", :steps => 20, :rows => 1} ] })
-</code>
 </pre>
 
 first value is a path to the rrd db, the 2nd param is a hash of keys and values
@@ -71,9 +69,9 @@ RRD.update(path,params)
 
 example usage:
 <pre>
-<code>
+
  RD.update('/test/path.rrd', ["123", "456", 1234])
-</code>
+
 </pre>
 
 RRD.update('/test/path.rrd', ["123", "456a", 1234])
@@ -88,13 +86,13 @@ h2. Graphing a RRD
 
 example usage:
 <pre>
-<code>
+
  RRD.graph('/test/path.rrd','/test/path.png', {:ago => Time.now.advance(:hours => -12),
  :width => 500, :height => 200, :image_type => "PNG", :title => "Memory 12hr test",
  :defs => [ {:key => "free", :type => "AVERAGE", :rpn => "AREA", :color => "C32227",
  :title => "Free Memory" }, {:key => "used", :type => "AVERAGE", :rpn => "AREA", :color => "932D0C",
  :title => "Used Memory" } ] , :base => 1024, :vlabel => "gb", :lowerlimit => 0})
-</code>
+
 </pre>
 
 first param is path to rrd
