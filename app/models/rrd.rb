@@ -12,23 +12,23 @@ class RRD
     elsif type == 'alphanum' # alpha numeric only (accepted: abc123, abc, 123)
        str = string.to_s.match( /[a-zA-Z0-9_\s]+/ )[0]
     elsif type == 'ds_type' # only DS types (accepted values are GAUGE, COUNTER, DERIVE, ABSOLUTE, and COMPUTE
-       str = string.to_s.match( /(GAUGE|COUNTER|DERIVE|ABSOLUTE|COMPUTE)/ )[0]
+       str = string.to_s.match( /(GAUGE|COUNTER|DERIVE|ABSOLUTE|COMPUTE)/ )[0] rescue RuntimeError
     elsif type == 'rra_type' # only RRA types (accepted values are AVERAGE, MIN, MAX, LAST
-       str = string.to_s.match( /(AVERAGE|MIN|MAX|LAST)/ )[0]
+       str = string.to_s.match( /(AVERAGE|MIN|MAX|LAST)/ )[0] rescue RuntimeError
     elsif type == 'path' # sanitizes the PATH of the RRD db will match test.rrd and /path/test.rrd
-       str = string.to_s
+       str = string.to_s.gsub(';', '')
     elsif type == 'imagetype'
-       str = string.to_s.match(/(PNG|SVG|EPS|PDF)/)[0] #[-a|--imgformat PNG|SVG|EPS|PDF]
+       str = string.to_s.match(/(PNG|SVG|EPS|PDF)/)[0] rescue RuntimeError #[-a|--imgformat PNG|SVG|EPS|PDF]
     elsif type == 'rpn'
-       str = string.to_s.match(/(PRINT|GPRINT|COMMENT|VRULE|HRULE|LINE|AREA|TICK|SHIFT|TEXTALIGN|STACK)/)[0]
+       str = string.to_s.match(/(PRINT|GPRINT|COMMENT|VRULE|HRULE|LINE|AREA|TICK|SHIFT|TEXTALIGN|STACK)/)[0] rescue RuntimeError
     elsif type == 'color'
       # ACK ground, CANVAS, SHADEA left/top border,
       #SHADEB right/bottom border, GRID, MGRID major grid,
       # FONT, FRAME and axis of the graph or ARROW.
-       str = string.to_s.match(/(BACK|CANVAS|SHADEA|SHADEB|GRID|MGRIF|FONT|FRAME|ARROW)/)[0]
+       str = string.to_s.match(/(BACK|CANVAS|SHADEA|SHADEB|GRID|MGRIF|FONT|FRAME|ARROW)/)[0] rescue RuntimeError
     end  
 
-    if str.nil?
+    if str.nil? || str=='RuntimeError'
       raise "No match was returned when matching #{type}"
     else
       return str
