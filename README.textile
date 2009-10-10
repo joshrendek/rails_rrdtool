@@ -1,9 +1,11 @@
 h2. What is it?
+
 I couldn't find anything up to date that worked on rails that was paranoid about escaping and protecting the shell so I wrote my own.
 
 I'm actively using this on my project called Servly.
 
 h2. Notes
+
 You can call 'live' RRD graphs (ie when a page loads, have an Ajax.Updater load another page that actually graphs the RRd you want)
 This works fine under my tests with graphing about 7 RRD's at the same time.
 
