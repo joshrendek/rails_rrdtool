@@ -3,8 +3,9 @@ class RRD
 	puts "test"
   end
 
+  # types are alphanum, num, graph, ds_type, rra_type, path
   def self.sanitize(string,type)
-    # types are alphanum, num, graph, ds_type, rra_type, path
+    
     str = ""
     if type == 'num' # 0-9 and . (accepted: 1.5, 10, 234)
        str = string.to_s.match( /[0-9.]+/ )[0]
@@ -34,15 +35,16 @@ class RRD
     end
   end
 
+  # example usage: 
+  # RRD.create('/test.rrd', {:step => 300, :heartbeat => 600,
+  # :ds => [  {:name => "test", :type => "GAUGE"}, {:name => "josh", :type => "GAUGE"} ]  ,
+  # :xff => ".5", :rra => [ {:type => "max", :steps => 20, :rows => 1} ] })
+  # first value is a path to the rrd db, the 2nd param is a hash of keys and values
+  # :ds is an array containing hashes for each DataSource (DS) type in the db
+  # :xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
+  # :rra is a array containing hashes with RRA types and corresponding values
   def self.create(path,params,rrdpath="rrdtool")
-    # example usage:
-    # RRD.create('/test.rrd', {:step => 300, :heartbeat => 600,
-    # :ds => [  {:name => "test", :type => "GAUGE"}, {:name => "josh", :type => "GAUGE"} ]  ,
-    # :xff => ".5", :rra => [ {:type => "max", :steps => 20, :rows => 1} ] })
-    # first value is a path to the rrd db, the 2nd param is a hash of keys and values
-    # :ds is an array containing hashes for each DataSource (DS) type in the db
-    # :xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
-    # :rra is a array containing hashes with RRA types and corresponding values
+    
 	puts "Creating RRD graph"
     puts "Step: " + self.sanitize(params[:step], 'num')
     begin
@@ -67,13 +69,14 @@ class RRD
     end
   end
 
+  # example usage:
+  # RRD.update('/test/path.rrd', ["123", "456a", 1234])
+  # first param is path to rrd db
+  # 2nd param will return data string of 123:456:1234 (each value is sanitized, only numeric values accepted)
+  # to be passed as the data values to be passed to the db
+  # N specifies the current time (NOW)
   def self.update(path, params,rrdpath="rrdtool")
-    # example usage:
-    # RRD.update('/test/path.rrd', ["123", "456a", 1234])
-    # first param is path to rrd db
-    # 2nd param will return data string of 123:456:1234 (each value is sanitized, only numeric values accepted)
-    # to be passed as the data values to be passed to the db
-    # N specifies the current time (NOW)
+    
 
     # sanitize the params
     begin
@@ -90,26 +93,26 @@ class RRD
     end
   end
 
+  # variables for DEF's are taken care of programatically
+  # required params
+  # :ago is when to start from, a Time object ( Time.now )
+  # :width, :height
+  # :image_type
+  # :title
+  # :defs => array of hashes
+  # # [:defs][:key] => The DB data key
+  # # [:defs][:type] => RRA Type
+  # # [:defs][:rpn] => RPN Type
+  # # [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
+  # # [:defs][:title] => Title for this DEF
+  # optional params
+  # :base
+  # :vlabel
+  # :lowerlimit
+  # :upperlimit
+  # :background --background
   def self.graph(path,image_path,params,rrdpath="rrdtool")
-    # variables for DEF's are taken care of programatically
-
-    # required params
-    # :ago is when to start from, a Time object ( Time.now )
-    # :width, :height
-    # :image_type
-    # :title
-    # :defs => array of hashes
-    # # [:defs][:key] => The DB data key
-    # # [:defs][:type] => RRA Type
-    # # [:defs][:rpn] => RPN Type
-    # # [:defs][:color] => Hex Color: (accepts: 001122 but not #001122)
-    # # [:defs][:title] => Title for this DEF
-    # optional params
-    # :base
-    # :vlabel
-    # :lowerlimit
-    # :upperlimit
-    # :background --background
+    
 
     begin
       cmd = "#{rrdpath} graph #{self.sanitize(image_path, 'path')} "
