@@ -1,0 +1,1629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>/Library/Ruby/Gems/1.8/gems/activerecord-2.3.3/lib/active_record/aggregations.rb</title>
+    <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="print.css" media="print" rel="stylesheet" type="text/css" />
+    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="rcov.js"></script>
+  </head>
+  <body>
+    <h1>Rails Rrdtool C0 Coverage Information - RCov</h1>
+    <h2>/Library/Ruby/Gems/1.8/gems/activerecord-2.3.3/lib/active_record/aggregations.rb</h2>
+
+    
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="-Library-Ruby-Gems-1_8-gems-activerecord-2_3_3-lib-active_record-aggregations_rb.html">/Library/Ruby/Gems/1.8/gems/activerecord-2.3.3/lib/active_record/aggregations.rb</a></td>
+            <td class='right_align'><tt>261</tt></td>
+            <td class='right_align'><tt>72</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>74.71%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:75px"></div>
+            <div class="uncovered" style="width:25px"></div>
+          </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>15.28%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:15px"></div>
+            <div class="uncovered" style="width:85px"></div>
+          </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Key</h3>
+    
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line1">1</a> module ActiveRecord</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line2">2</a>   module Aggregations # :nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line3">3</a>     def self.included(base)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line4">4</a>       base.extend(ClassMethods)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line5">5</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line6">6</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line7">7</a>     def clear_aggregation_cache #:nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line8">8</a>       self.class.reflect_on_all_aggregations.to_a.each do |assoc|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line9">9</a>         instance_variable_set &quot;@#{assoc.name}&quot;, nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line10">10</a>       end unless self.new_record?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line11">11</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line13">13</a>     # Active Record implements aggregation through a macro-like class method called +composed_of+ for representing attributes</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line14">14</a>     # as value objects. It expresses relationships like &quot;Account [is] composed of Money [among other things]&quot; or &quot;Person [is]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a>     # composed of [an] address&quot;. Each call to the macro adds a description of how the value objects are created from the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line16">16</a>     # attributes of the entity object (when the entity is initialized either as a new object or from finding an existing object)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a>     # and how it can be turned back into attributes (when the entity is saved to the database). Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a>     #   class Customer &lt; ActiveRecord::Base</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line20">20</a>     #     composed_of :balance, :class_name =&gt; &quot;Money&quot;, :mapping =&gt; %w(balance amount)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line21">21</a>     #     composed_of :address, :mapping =&gt; [ %w(address_street street), %w(address_city city) ]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line22">22</a>     #   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a>     # The customer class now has the following methods to manipulate the value objects:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a>     # * &lt;tt&gt;Customer#balance, Customer#balance=(money)&lt;/tt&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line26">26</a>     # * &lt;tt&gt;Customer#address, Customer#address=(address)&lt;/tt&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>     # These methods will operate with value objects like the ones described below:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a>     #  class Money</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line31">31</a>     #    include Comparable</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a>     #    attr_reader :amount, :currency</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line33">33</a>     #    EXCHANGE_RATES = { &quot;USD_TO_DKK&quot; =&gt; 6 }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line35">35</a>     #    def initialize(amount, currency = &quot;USD&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line36">36</a>     #      @amount, @currency = amount, currency</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line38">38</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line39">39</a>     #    def exchange_to(other_currency)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line40">40</a>     #      exchanged_amount = (amount * EXCHANGE_RATES[&quot;#{currency}_TO_#{other_currency}&quot;]).floor</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a>     #      Money.new(exchanged_amount, other_currency)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line44">44</a>     #    def ==(other_money)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a>     #      amount == other_money.amount &amp;&amp; currency == other_money.currency</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line48">48</a>     #    def &lt;=&gt;(other_money)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a>     #      if currency == other_money.currency</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>     #        amount &lt;=&gt; amount</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>     #      else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a>     #        amount &lt;=&gt; other_money.exchange_to(currency).amount</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>     #      end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>     #  end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a>     #  class Address</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a>     #    attr_reader :street, :city</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>     #    def initialize(street, city)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a>     #      @street, @city = street, city</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>     #    def close_to?(other_address)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line64">64</a>     #      city == other_address.city</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>     #    def ==(other_address)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>     #      city == other_address.city &amp;&amp; street == other_address.street</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>     #    end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line70">70</a>     #  end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>     # Now it's possible to access attributes from the database through the value objects instead. If you choose to name the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a>     # composition the same as the attribute's name, it will be the only way to access that attribute. That's the case with our</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>     # +balance+ attribute. You interact with the value objects just like you would any other attribute, though:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a>     #   customer.balance = Money.new(20)     # sets the Money value object and the attribute</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a>     #   customer.balance                     # =&gt; Money value object</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>     #   customer.balance.exchange_to(&quot;DKK&quot;)  # =&gt; Money.new(120, &quot;DKK&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line79">79</a>     #   customer.balance &gt; Money.new(10)     # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line80">80</a>     #   customer.balance == Money.new(20)    # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line81">81</a>     #   customer.balance &lt; Money.new(5)      # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line82">82</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line83">83</a>     # Value objects can also be composed of multiple attributes, such as the case of Address. The order of the mappings will</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line84">84</a>     # determine the order of the parameters. Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line85">85</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line86">86</a>     #   customer.address_street = &quot;Hyancintvej&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line87">87</a>     #   customer.address_city   = &quot;Copenhagen&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line88">88</a>     #   customer.address        # =&gt; Address.new(&quot;Hyancintvej&quot;, &quot;Copenhagen&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line89">89</a>     #   customer.address = Address.new(&quot;May Street&quot;, &quot;Chicago&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line90">90</a>     #   customer.address_street # =&gt; &quot;May Street&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line91">91</a>     #   customer.address_city   # =&gt; &quot;Chicago&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line92">92</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line93">93</a>     # == Writing value objects</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line95">95</a>     # Value objects are immutable and interchangeable objects that represent a given value, such as a Money object representing</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a>     # $5. Two Money objects both representing $5 should be equal (through methods such as &lt;tt&gt;==&lt;/tt&gt; and &lt;tt&gt;&lt;=&gt;&lt;/tt&gt; from Comparable if ranking</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line97">97</a>     # makes sense). This is unlike entity objects where equality is determined by identity. An entity class such as Customer can</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a>     # easily have two different objects that both have an address on Hyancintvej. Entity identity is determined by object or</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a>     # relational unique identifiers (such as primary keys). Normal ActiveRecord::Base classes are entity objects.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>     # It's also important to treat the value objects as immutable. Don't allow the Money object to have its amount changed after</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line102">102</a>     # creation. Create a new Money object with the new value instead. This is exemplified by the Money#exchange_to method that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line103">103</a>     # returns a new value object instead of changing its own values. Active Record won't persist value objects that have been</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line104">104</a>     # changed through means other than the writer method.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line105">105</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line106">106</a>     # The immutable requirement is enforced by Active Record by freezing any object assigned as a value object. Attempting to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line107">107</a>     # change it afterwards will result in a ActiveSupport::FrozenObjectError.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line108">108</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line109">109</a>     # Read more about value objects on http://c2.com/cgi/wiki?ValueObject and on the dangers of not keeping value objects</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line110">110</a>     # immutable on http://c2.com/cgi/wiki?ValueObjectsShouldBeImmutable</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line111">111</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line112">112</a>     # == Custom constructors and converters</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line113">113</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line114">114</a>     # By default value objects are initialized by calling the &lt;tt&gt;new&lt;/tt&gt; constructor of the value class passing each of the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line115">115</a>     # mapped attributes, in the order specified by the &lt;tt&gt;:mapping&lt;/tt&gt; option, as arguments. If the value class doesn't support</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line116">116</a>     # this convention then +composed_of+ allows a custom constructor to be specified.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line117">117</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line118">118</a>     # When a new value is assigned to the value object the default assumption is that the new value is an instance of the value</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line119">119</a>     # class. Specifying a custom converter allows the new value to be automatically converted to an instance of value class if</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line120">120</a>     # necessary.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line121">121</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line122">122</a>     # For example, the NetworkResource model has +network_address+ and +cidr_range+ attributes that should be aggregated using the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a>     # NetAddr::CIDR value class (http://netaddr.rubyforge.org). The constructor for the value class is called +create+ and it</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line124">124</a>     # expects a CIDR address string as a parameter. New values can be assigned to the value object using either another</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line125">125</a>     # NetAddr::CIDR object, a string or an array. The &lt;tt&gt;:constructor&lt;/tt&gt; and &lt;tt&gt;:converter&lt;/tt&gt; options can be used to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line126">126</a>     # meet these requirements:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line127">127</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line128">128</a>     #   class NetworkResource &lt; ActiveRecord::Base</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line129">129</a>     #     composed_of :cidr,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line130">130</a>     #                 :class_name =&gt; 'NetAddr::CIDR',</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line131">131</a>     #                 :mapping =&gt; [ %w(network_address network), %w(cidr_range bits) ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line132">132</a>     #                 :allow_nil =&gt; true,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line133">133</a>     #                 :constructor =&gt; Proc.new { |network_address, cidr_range| NetAddr::CIDR.create(&quot;#{network_address}/#{cidr_range}&quot;) },</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line134">134</a>     #                 :converter =&gt; Proc.new { |value| NetAddr::CIDR.create(value.is_a?(Array) ? value.join('/') : value) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line135">135</a>     #   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line136">136</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line137">137</a>     #   # This calls the :constructor</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line138">138</a>     #   network_resource = NetworkResource.new(:network_address =&gt; '192.168.0.1', :cidr_range =&gt; 24)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line139">139</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line140">140</a>     #   # These assignments will both use the :converter</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a>     #   network_resource.cidr = [ '192.168.2.1', 8 ]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line142">142</a>     #   network_resource.cidr = '192.168.0.1/24'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line143">143</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line144">144</a>     #   # This assignment won't use the :converter as the value is already an instance of the value class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line145">145</a>     #   network_resource.cidr = NetAddr::CIDR.create('192.168.2.1/8')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line146">146</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line147">147</a>     #   # Saving and then reloading will use the :constructor on reload</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line148">148</a>     #   network_resource.save</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line149">149</a>     #   network_resource.reload</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line150">150</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line151">151</a>     # == Finding records by a value object</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line152">152</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line153">153</a>     # Once a +composed_of+ relationship is specified for a model, records can be loaded from the database by specifying an instance</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line154">154</a>     # of the value object in the conditions hash. The following example finds all customers with +balance_amount+ equal to 20 and</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line155">155</a>     # +balance_currency+ equal to &quot;USD&quot;:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line156">156</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line157">157</a>     #   Customer.find(:all, :conditions =&gt; {:balance =&gt; Money.new(20, &quot;USD&quot;)})</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line158">158</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line159">159</a>     module ClassMethods</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line160">160</a>       # Adds reader and writer methods for manipulating a value object:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line161">161</a>       # &lt;tt&gt;composed_of :address&lt;/tt&gt; adds &lt;tt&gt;address&lt;/tt&gt; and &lt;tt&gt;address=(new_address)&lt;/tt&gt; methods.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line162">162</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line163">163</a>       # Options are:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line164">164</a>       # * &lt;tt&gt;:class_name&lt;/tt&gt; - Specifies the class name of the association. Use it only if that name can't be inferred</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line165">165</a>       #   from the part id. So &lt;tt&gt;composed_of :address&lt;/tt&gt; will by default be linked to the Address class, but</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line166">166</a>       #   if the real class name is CompanyAddress, you'll have to specify it with this option.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line167">167</a>       # * &lt;tt&gt;:mapping&lt;/tt&gt; - Specifies the mapping of entity attributes to attributes of the value object. Each mapping</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line168">168</a>       #   is represented as an array where the first item is the name of the entity attribute and the second item is the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line169">169</a>       #   name the attribute in the value object. The order in which mappings are defined determine the order in which</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line170">170</a>       #   attributes are sent to the value class constructor.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line171">171</a>       # * &lt;tt&gt;:allow_nil&lt;/tt&gt; - Specifies that the value object will not be instantiated when all mapped</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line172">172</a>       #   attributes are +nil+.  Setting the value object to +nil+ has the effect of writing +nil+ to all mapped attributes.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line173">173</a>       #   This defaults to +false+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line174">174</a>       # * &lt;tt&gt;:constructor&lt;/tt&gt; - A symbol specifying the name of the constructor method or a Proc that is called to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line175">175</a>       #   initialize the value object. The constructor is passed all of the mapped attributes, in the order that they</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line176">176</a>       #   are defined in the &lt;tt&gt;:mapping option&lt;/tt&gt;, as arguments and uses them to instantiate a &lt;tt&gt;:class_name&lt;/tt&gt; object.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line177">177</a>       #   The default is &lt;tt&gt;:new&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line178">178</a>       # * &lt;tt&gt;:converter&lt;/tt&gt; - A symbol specifying the name of a class method of &lt;tt&gt;:class_name&lt;/tt&gt; or a Proc that is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line179">179</a>       #   called when a new value is assigned to the value object. The converter is passed the single value that is used</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line180">180</a>       #   in the assignment and is only called if the new value is not an instance of &lt;tt&gt;:class_name&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line181">181</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line182">182</a>       # Option examples:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line183">183</a>       #   composed_of :temperature, :mapping =&gt; %w(reading celsius)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line184">184</a>       #   composed_of :balance, :class_name =&gt; &quot;Money&quot;, :mapping =&gt; %w(balance amount), :converter =&gt; Proc.new { |balance| balance.to_money }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line185">185</a>       #   composed_of :address, :mapping =&gt; [ %w(address_street street), %w(address_city city) ]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line186">186</a>       #   composed_of :gps_location</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line187">187</a>       #   composed_of :gps_location, :allow_nil =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line188">188</a>       #   composed_of :ip_address,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line189">189</a>       #               :class_name =&gt; 'IPAddr',</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line190">190</a>       #               :mapping =&gt; %w(ip to_i),</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line191">191</a>       #               :constructor =&gt; Proc.new { |ip| IPAddr.new(ip, Socket::AF_INET) },</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line192">192</a>       #               :converter =&gt; Proc.new { |ip| ip.is_a?(Integer) ? IPAddr.new(ip, Socket::AF_INET) : IPAddr.new(ip.to_s) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line193">193</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line194">194</a>       def composed_of(part_id, options = {}, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line195">195</a>         options.assert_valid_keys(:class_name, :mapping, :allow_nil, :constructor, :converter)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line196">196</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line197">197</a>         name        = part_id.id2name</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line198">198</a>         class_name  = options[:class_name]  || name.camelize</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line199">199</a>         mapping     = options[:mapping]     || [ name, name ]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line200">200</a>         mapping     = [ mapping ] unless mapping.first.is_a?(Array)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line201">201</a>         allow_nil   = options[:allow_nil]   || false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line202">202</a>         constructor = options[:constructor] || :new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line203">203</a>         converter   = options[:converter]   || block</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line204">204</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line205">205</a>         ActiveSupport::Deprecation.warn('The conversion block has been deprecated, use the :converter option instead.', caller) if block_given?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line206">206</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line207">207</a>         reader_method(name, class_name, mapping, allow_nil, constructor)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line208">208</a>         writer_method(name, class_name, mapping, allow_nil, converter)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line209">209</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line210">210</a>         create_reflection(:composed_of, part_id, options, self)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line211">211</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line212">212</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line213">213</a>       private</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line214">214</a>         def reader_method(name, class_name, mapping, allow_nil, constructor)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line215">215</a>           module_eval do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line216">216</a>             define_method(name) do |*args|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line217">217</a>               force_reload = args.first || false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line218">218</a>               if (instance_variable_get(&quot;@#{name}&quot;).nil? || force_reload) &amp;&amp; (!allow_nil || mapping.any? {|pair| !read_attribute(pair.first).nil? })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line219">219</a>                 attrs = mapping.collect {|pair| read_attribute(pair.first)}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line220">220</a>                 object = case constructor</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line221">221</a>                   when Symbol</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line222">222</a>                     class_name.constantize.send(constructor, *attrs)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line223">223</a>                   when Proc, Method</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line224">224</a>                     constructor.call(*attrs)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line225">225</a>                   else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line226">226</a>                     raise ArgumentError, 'Constructor must be a symbol denoting the constructor method to call or a Proc to be invoked.'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line227">227</a>                   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line228">228</a>                 instance_variable_set(&quot;@#{name}&quot;, object)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line229">229</a>               end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line230">230</a>               instance_variable_get(&quot;@#{name}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line231">231</a>             end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line232">232</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line233">233</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line234">234</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line235">235</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line236">236</a>         def writer_method(name, class_name, mapping, allow_nil, converter)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line237">237</a>           module_eval do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line238">238</a>             define_method(&quot;#{name}=&quot;) do |part|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line239">239</a>               if part.nil? &amp;&amp; allow_nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line240">240</a>                 mapping.each { |pair| self[pair.first] = nil }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line241">241</a>                 instance_variable_set(&quot;@#{name}&quot;, nil)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line242">242</a>               else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line243">243</a>                 unless part.is_a?(class_name.constantize) || converter.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line244">244</a>                   part = case converter</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line245">245</a>                     when Symbol</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line246">246</a>                      class_name.constantize.send(converter, part)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line247">247</a>                     when Proc, Method</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line248">248</a>                       converter.call(part)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line249">249</a>                     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line250">250</a>                       raise ArgumentError, 'Converter must be a symbol denoting the converter method to call or a Proc to be invoked.'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line251">251</a>                     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line252">252</a>                 end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line253">253</a>                 mapping.each { |pair| self[pair.first] = part.send(pair.last) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line254">254</a>                 instance_variable_set(&quot;@#{name}&quot;, part.freeze)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line255">255</a>               end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line256">256</a>             end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line257">257</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line258">258</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line259">259</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line260">260</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line261">261</a> end</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+
+    <p>Generated on Sat Oct 10 16:43:25 -0400 2009 with <a href="http://github.com/relevance/rcov">rcov 0.9.3</a></p>
+
+  </body>
+</html>

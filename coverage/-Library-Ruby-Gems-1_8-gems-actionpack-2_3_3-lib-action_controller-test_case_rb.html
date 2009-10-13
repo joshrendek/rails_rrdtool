@@ -1,0 +1,1287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>/Library/Ruby/Gems/1.8/gems/actionpack-2.3.3/lib/action_controller/test_case.rb</title>
+    <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="print.css" media="print" rel="stylesheet" type="text/css" />
+    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="rcov.js"></script>
+  </head>
+  <body>
+    <h1>Rails Rrdtool C0 Coverage Information - RCov</h1>
+    <h2>/Library/Ruby/Gems/1.8/gems/actionpack-2.3.3/lib/action_controller/test_case.rb</h2>
+
+    
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="-Library-Ruby-Gems-1_8-gems-actionpack-2_3_3-lib-action_controller-test_case_rb.html">/Library/Ruby/Gems/1.8/gems/actionpack-2.3.3/lib/action_controller/test_case.rb</a></td>
+            <td class='right_align'><tt>204</tt></td>
+            <td class='right_align'><tt>78</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>74.02%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:74px"></div>
+            <div class="uncovered" style="width:26px"></div>
+          </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>35.90%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:36px"></div>
+            <div class="uncovered" style="width:64px"></div>
+          </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Key</h3>
+    
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line1">1</a> require 'active_support/test_case'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line2">2</a> require 'action_controller/test_process'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line3">3</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line4">4</a> module ActionController</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line5">5</a>   # Superclass for ActionController functional tests. Functional tests allow you to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line6">6</a>   # test a single controller action per test method. This should not be confused with</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line7">7</a>   # integration tests (see ActionController::IntegrationTest), which are more like</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line8">8</a>   # &quot;stories&quot; that can involve multiple controllers and mutliple actions (i.e. multiple</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line9">9</a>   # different HTTP requests).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line10">10</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a>   # == Basic example</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line13">13</a>   # Functional tests are written as follows:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line14">14</a>   # 1. First, one uses the +get+, +post+, +put+, +delete+ or +head+ method to simulate</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a>   #    an HTTP request.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line16">16</a>   # 2. Then, one asserts whether the current state is as expected. &quot;State&quot; can be anything:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a>   #    the controller's HTTP response, the database contents, etc.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a>   # For example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line20">20</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line21">21</a>   #   class BooksControllerTest &lt; ActionController::TestCase</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line22">22</a>   #     def test_create</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a>   #       # Simulate a POST response with the given HTTP parameters.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a>   #       post(:create, :book =&gt; { :title =&gt; &quot;Love Hina&quot; })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line26">26</a>   #       # Assert that the controller tried to redirect us to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a>   #       # the created book's URI.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>   #       assert_response :found</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a>   #       # Assert that the controller really put the book in the database.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line31">31</a>   #       assert_not_nil Book.find_by_title(&quot;Love Hina&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a>   #     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line33">33</a>   #   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line35">35</a>   # == Special instance variables</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line36">36</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a>   # ActionController::TestCase will also automatically provide the following instance</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line38">38</a>   # variables for use in the tests:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line39">39</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line40">40</a>   # &lt;b&gt;@controller&lt;/b&gt;::</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a>   #      The controller instance that will be tested.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>   # &lt;b&gt;@request&lt;/b&gt;::</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>   #      An ActionController::TestRequest, representing the current HTTP</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line44">44</a>   #      request. You can modify this object before sending the HTTP request. For example,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a>   #      you might want to set some session properties before sending a GET request.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a>   # &lt;b&gt;@response&lt;/b&gt;::</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>   #      An ActionController::TestResponse object, representing the response</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line48">48</a>   #      of the last HTTP response. In the above example, &lt;tt&gt;@response&lt;/tt&gt; becomes valid</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a>   #      after calling +post+. If the various assert methods are not sufficient, then you</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>   #      may use this object to inspect the HTTP response in detail.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a>   # (Earlier versions of Rails required each functional test to subclass</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>   # Test::Unit::TestCase and define @controller, @request, @response in +setup+.)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>   # == Controller is automatically inferred</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a>   # ActionController::TestCase will automatically infer the controller under test</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a>   # from the test class name. If the controller cannot be inferred from the test</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>   # class name, you can explicity set it with +tests+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>   #   class SpecialEdgeCaseWidgetsControllerTest &lt; ActionController::TestCase</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>   #     tests WidgetController</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>   #   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line64">64</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a>   # == Testing controller internals</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>   # In addition to these specific assertions, you also have easy access to various collections that the regular test/unit assertions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>   # can be used against. These collections are:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line70">70</a>   # * assigns: Instance variables assigned in the action that are available for the view.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>   # * session: Objects being saved in the session.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>   # * flash: The flash objects currently in the session.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a>   # * cookies: Cookies being sent to the user on this request.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a>   # These collections can be used just like any other hash:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a>   #   assert_not_nil assigns(:person) # makes sure that a @person instance variable was set</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>   #   assert_equal &quot;Dave&quot;, cookies[:name] # makes sure that a cookie called :name was set as &quot;Dave&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line79">79</a>   #   assert flash.empty? # makes sure that there's nothing in the flash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line80">80</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line81">81</a>   # For historic reasons, the assigns hash uses string-based keys. So assigns[:person] won't work, but assigns[&quot;person&quot;] will. To</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line82">82</a>   # appease our yearning for symbols, though, an alternative accessor has been devised using a method call instead of index referencing.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line83">83</a>   # So assigns(:person) will work just like assigns[&quot;person&quot;], but again, assigns[:person] will not work.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line84">84</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line85">85</a>   # On top of the collections, you have the complete url that a given action redirected to available in redirect_to_url.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line86">86</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line87">87</a>   # For redirects within the same controller, you can even call follow_redirect and the redirect will be followed, triggering another</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line88">88</a>   # action call which can then be asserted against.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line89">89</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line90">90</a>   # == Manipulating the request collections</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line91">91</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line92">92</a>   # The collections described above link to the response, so you can test if what the actions were expected to do happened. But</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line93">93</a>   # sometimes you also want to manipulate these collections in the incoming request. This is really only relevant for sessions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>   # and cookies, though. For sessions, you just do:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line95">95</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a>   #   @request.session[:key] = &quot;value&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line97">97</a>   #   @request.cookies[&quot;key&quot;] = &quot;value&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a>   # == Testing named routes</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>   # If you're using named routes, they can be easily tested using the original named routes' methods straight in the test case.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line102">102</a>   # Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line103">103</a>   #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line104">104</a>   #  assert_redirected_to page_url(:title =&gt; 'foo')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line105">105</a>   class TestCase &lt; ActiveSupport::TestCase</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line106">106</a>     include TestProcess</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line107">107</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line108">108</a>     module Assertions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line109">109</a>       %w(response selector tag dom routing model).each do |kind|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line110">110</a>         include ActionController::Assertions.const_get(&quot;#{kind.camelize}Assertions&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line111">111</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line112">112</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line113">113</a>       def clean_backtrace(&amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line114">114</a>         yield</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line115">115</a>       rescue ActiveSupport::TestCase::Assertion =&gt; error</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line116">116</a>         framework_path = Regexp.new(File.expand_path(&quot;#{File.dirname(__FILE__)}/assertions&quot;))</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line117">117</a>         error.backtrace.reject! { |line| File.expand_path(line) =~ framework_path }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line118">118</a>         raise</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line119">119</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line120">120</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line121">121</a>     include Assertions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line122">122</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a>     # When the request.remote_addr remains the default for testing, which is 0.0.0.0, the exception is simply raised inline</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line124">124</a>     # (bystepping the regular exception handling from rescue_action). If the request.remote_addr is anything else, the regular</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line125">125</a>     # rescue_action process takes place. This means you can test your rescue_action code by setting remote_addr to something else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line126">126</a>     # than 0.0.0.0.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line127">127</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line128">128</a>     # The exception is stored in the exception accessor for further inspection.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line129">129</a>     module RaiseActionExceptions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line130">130</a>       def self.included(base)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line131">131</a>         base.class_eval do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line132">132</a>           attr_accessor :exception</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line133">133</a>           protected :exception, :exception=</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line134">134</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line135">135</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line136">136</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line137">137</a>       protected</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line138">138</a>         def rescue_action_without_handler(e)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line139">139</a>           self.exception = e</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line140">140</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line141">141</a>           if request.remote_addr == &quot;0.0.0.0&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line142">142</a>             raise(e)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line143">143</a>           else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line144">144</a>             super(e)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line145">145</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line146">146</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line147">147</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line148">148</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line149">149</a>     setup :setup_controller_request_and_response</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line150">150</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line151">151</a>     @@controller_class = nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line152">152</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line153">153</a>     class &lt;&lt; self</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line154">154</a>       # Sets the controller class name. Useful if the name can't be inferred from test class.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line155">155</a>       # Expects +controller_class+ as a constant. Example: &lt;tt&gt;tests WidgetController&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line156">156</a>       def tests(controller_class)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line157">157</a>         self.controller_class = controller_class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line158">158</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line159">159</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line160">160</a>       def controller_class=(new_class)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line161">161</a>         prepare_controller_class(new_class) if new_class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line162">162</a>         write_inheritable_attribute(:controller_class, new_class)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line163">163</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line164">164</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line165">165</a>       def controller_class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line166">166</a>         if current_controller_class = read_inheritable_attribute(:controller_class)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line167">167</a>           current_controller_class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line168">168</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line169">169</a>           self.controller_class = determine_default_controller_class(name)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line170">170</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line171">171</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line172">172</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line173">173</a>       def determine_default_controller_class(name)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line174">174</a>         name.sub(/Test$/, '').constantize</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line175">175</a>       rescue NameError</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line176">176</a>         nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line177">177</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line178">178</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line179">179</a>       def prepare_controller_class(new_class)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line180">180</a>         new_class.send :include, RaiseActionExceptions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line181">181</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line182">182</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line183">183</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line184">184</a>     def setup_controller_request_and_response</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line185">185</a>       @request = TestRequest.new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line186">186</a>       @response = TestResponse.new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line187">187</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line188">188</a>       if klass = self.class.controller_class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line189">189</a>         @controller ||= klass.new rescue nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line190">190</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line191">191</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line192">192</a>       if @controller</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line193">193</a>         @controller.request = @request</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line194">194</a>         @controller.params = {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line195">195</a>         @controller.send(:initialize_current_url)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line196">196</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line197">197</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line198">198</a>     </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line199">199</a>     # Cause the action to be rescued according to the regular rules for rescue_action when the visitor is not local</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line200">200</a>     def rescue_action_in_public!</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line201">201</a>       @request.remote_addr = '208.77.188.166' # example.com</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line202">202</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line203">203</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line204">204</a> end</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+
+    <p>Generated on Sat Oct 10 16:43:24 -0400 2009 with <a href="http://github.com/relevance/rcov">rcov 0.9.3</a></p>
+
+  </body>
+</html>

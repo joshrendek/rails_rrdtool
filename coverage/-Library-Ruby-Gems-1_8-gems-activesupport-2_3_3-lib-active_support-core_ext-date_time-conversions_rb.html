@@ -1,0 +1,639 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>/Library/Ruby/Gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/date_time/conversions.rb</title>
+    <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="print.css" media="print" rel="stylesheet" type="text/css" />
+    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="rcov.js"></script>
+  </head>
+  <body>
+    <h1>Rails Rrdtool C0 Coverage Information - RCov</h1>
+    <h2>/Library/Ruby/Gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/date_time/conversions.rb</h2>
+
+    
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="-Library-Ruby-Gems-1_8-gems-activesupport-2_3_3-lib-active_support-core_ext-date_time-conversions_rb.html">/Library/Ruby/Gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/date_time/conversions.rb</a></td>
+            <td class='right_align'><tt>96</tt></td>
+            <td class='right_align'><tt>46</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>83.33%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:83px"></div>
+            <div class="uncovered" style="width:17px"></div>
+          </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>69.57%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:70px"></div>
+            <div class="uncovered" style="width:30px"></div>
+          </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Key</h3>
+    
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line1">1</a> module ActiveSupport #:nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line2">2</a>   module CoreExtensions #:nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line3">3</a>     module DateTime #:nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line4">4</a>       # Converting datetimes to formatted strings, dates, and times.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line5">5</a>       module Conversions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line6">6</a>         def self.append_features(base) #:nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line7">7</a>           base.class_eval do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line8">8</a>             alias_method :default_inspect, :inspect</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line9">9</a>             alias_method :to_default_s, :to_s unless (instance_methods(false) &amp; [:to_s, 'to_s']).empty?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line10">10</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a>             # Ruby 1.9 has DateTime#to_time which internally relies on Time. We define our own #to_time which allows</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a>             # DateTimes outside the range of what can be created with Time.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line13">13</a>             remove_method :to_time if instance_methods.include?(:to_time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line14">14</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line16">16</a>           super</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line18">18</a>           base.class_eval do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line19">19</a>             alias_method :to_s, :to_formatted_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>             alias_method :inspect, :readable_inspect</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line21">21</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line22">22</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a>         # Convert to a formatted string. See Time::DATE_FORMATS for predefined formats.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a>         # </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line26">26</a>         # This method is aliased to &lt;tt&gt;to_s&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a>         # </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>         # === Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a>         #   datetime = DateTime.civil(2007, 12, 4, 0, 0, 0, 0)   # =&gt; Tue, 04 Dec 2007 00:00:00 +0000</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a>         # </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line31">31</a>         #   datetime.to_formatted_s(:db)            # =&gt; &quot;2007-12-04 00:00:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a>         #   datetime.to_s(:db)                      # =&gt; &quot;2007-12-04 00:00:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line33">33</a>         #   datetime.to_s(:number)                  # =&gt; &quot;20071204000000&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a>         #   datetime.to_formatted_s(:short)         # =&gt; &quot;04 Dec 00:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line35">35</a>         #   datetime.to_formatted_s(:long)          # =&gt; &quot;December 04, 2007 00:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line36">36</a>         #   datetime.to_formatted_s(:long_ordinal)  # =&gt; &quot;December 4th, 2007 00:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a>         #   datetime.to_formatted_s(:rfc822)        # =&gt; &quot;Tue, 04 Dec 2007 00:00:00 +0000&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line38">38</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line39">39</a>         # == Adding your own datetime formats to to_formatted_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line40">40</a>         # DateTime formats are shared with Time. You can add your own to the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a>         # Time::DATE_FORMATS hash. Use the format name as the hash key and</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>         # either a strftime string or Proc instance that takes a time or</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>         # datetime argument as the value.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line44">44</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a>         #   # config/initializers/time_formats.rb</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a>         #   Time::DATE_FORMATS[:month_and_year] = &quot;%B %Y&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>         #   Time::DATE_FORMATS[:short_ordinal] = lambda { |time| time.strftime(&quot;%B #{time.day.ordinalize}&quot;) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line48">48</a>         def to_formatted_s(format = :default)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line49">49</a>           return to_default_s unless formatter = ::Time::DATE_FORMATS[format]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line50">50</a>           formatter.respond_to?(:call) ? formatter.call(self).to_s : strftime(formatter)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line51">51</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>         # Returns the +utc_offset+ as an +HH:MM formatted string. Examples:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>         #   datetime = DateTime.civil(2000, 1, 1, 0, 0, 0, Rational(-6, 24))</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>         #   datetime.formatted_offset         # =&gt; &quot;-06:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a>         #   datetime.formatted_offset(false)  # =&gt; &quot;-0600&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line58">58</a>         def formatted_offset(colon = true, alternate_utc_string = nil)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line59">59</a>           utc? &amp;&amp; alternate_utc_string || utc_offset.to_utc_offset_s(colon)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line60">60</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>         </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>         # Overrides the default inspect method with a human readable one, e.g., &quot;Mon, 21 Feb 2005 14:30:00 +0000&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line63">63</a>         def readable_inspect</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line64">64</a>           to_s(:rfc822)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line65">65</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>         # Converts self to a Ruby Date object; time portion is discarded</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line68">68</a>         def to_date</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line69">69</a>           ::Date.new(year, month, day)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line70">70</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>         # Attempts to convert self to a Ruby Time object; returns self if out of range of Ruby Time class</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a>         # If self has an offset other than 0, self will just be returned unaltered, since there's no clean way to map it to a Time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line74">74</a>         def to_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line75">75</a>           self.offset == 0 ? ::Time.utc_time(year, month, day, hour, min, sec) : self</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line76">76</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>         # To be able to keep Times, Dates and DateTimes interchangeable on conversions</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line79">79</a>         def to_datetime</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line80">80</a>           self</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line81">81</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line82">82</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line83">83</a>         # Converts datetime to an appropriate format for use in XML</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line84">84</a>         def xmlschema</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line85">85</a>           strftime(&quot;%Y-%m-%dT%H:%M:%S%Z&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line86">86</a>         end if RUBY_VERSION &lt; '1.9'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line87">87</a>         </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line88">88</a>         # Converts self to a floating-point number of seconds since the Unix epoch </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line89">89</a>         def to_f</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line90">90</a>           days_since_unix_epoch = self - ::DateTime.civil(1970)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line91">91</a>           (days_since_unix_epoch * 86_400).to_f</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line92">92</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line93">93</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line95">95</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a> end</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+
+    <p>Generated on Sat Oct 10 16:43:26 -0400 2009 with <a href="http://github.com/relevance/rcov">rcov 0.9.3</a></p>
+
+  </body>
+</html>

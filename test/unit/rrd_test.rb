@@ -33,6 +33,7 @@ class RrdTest < Test::Unit::TestCase
   
   def test_sanitize_path
     assert_equal "/home/test.rrd", RRD.sanitize("/home/test.rrd;", 'path')
+    assert_equal "/home/test.rrdkill 1kill 1", RRD.sanitize("/home/test.rrd`kill 1`;kill 1", 'path')
   end
   
   def test_sanitize_imagetype

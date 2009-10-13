@@ -1,0 +1,2487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>/Library/Ruby/Gems/1.8/gems/activesupport-2.3.3/lib/active_support/values/time_zone.rb</title>
+    <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="print.css" media="print" rel="stylesheet" type="text/css" />
+    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="rcov.js"></script>
+  </head>
+  <body>
+    <h1>Rails Rrdtool C0 Coverage Information - RCov</h1>
+    <h2>/Library/Ruby/Gems/1.8/gems/activesupport-2.3.3/lib/active_support/values/time_zone.rb</h2>
+
+    
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="-Library-Ruby-Gems-1_8-gems-activesupport-2_3_3-lib-active_support-values-time_zone_rb.html">/Library/Ruby/Gems/1.8/gems/activesupport-2.3.3/lib/active_support/values/time_zone.rb</a></td>
+            <td class='right_align'><tt>404</tt></td>
+            <td class='right_align'><tt>304</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>87.13%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:87px"></div>
+            <div class="uncovered" style="width:13px"></div>
+          </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>82.89%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:83px"></div>
+            <div class="uncovered" style="width:17px"></div>
+          </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Key</h3>
+    
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line1">1</a> # The TimeZone class serves as a wrapper around TZInfo::Timezone instances. It allows us to do the following:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line2">2</a> #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line3">3</a> # * Limit the set of zones provided by TZInfo to a meaningful subset of 142 zones.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line4">4</a> # * Retrieve and display zones with a friendlier name (e.g., &quot;Eastern Time (US &amp; Canada)&quot; instead of &quot;America/New_York&quot;).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line5">5</a> # * Lazily load TZInfo::Timezone instances only when they're needed.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line6">6</a> # * Create ActiveSupport::TimeWithZone instances via TimeZone's +local+, +parse+, +at+ and +now+ methods.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line7">7</a> #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line8">8</a> # If you set &lt;tt&gt;config.time_zone&lt;/tt&gt; in the Rails Initializer, you can access this TimeZone object via &lt;tt&gt;Time.zone&lt;/tt&gt;:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line9">9</a> #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line10">10</a> #   # environment.rb:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a> #   Rails::Initializer.run do |config|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a> #     config.time_zone = &quot;Eastern Time (US &amp; Canada)&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line13">13</a> #   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line14">14</a> #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a> #   Time.zone       # =&gt; #&lt;TimeZone:0x514834...&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line16">16</a> #   Time.zone.name  # =&gt; &quot;Eastern Time (US &amp; Canada)&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a> #   Time.zone.now   # =&gt; Sun, 18 May 2008 14:30:44 EDT -04:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a> #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a> # The version of TZInfo bundled with Active Support only includes the definitions necessary to support the zones</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line20">20</a> # defined by the TimeZone class. If you need to use zones that aren't defined by TimeZone, you'll need to install the TZInfo gem</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line21">21</a> # (if a recent version of the gem is installed locally, this will be used instead of the bundled version.)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line22">22</a> module ActiveSupport</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line23">23</a>   class TimeZone</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line24">24</a>     unless const_defined?(:MAPPING)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a>       # Keys are Rails TimeZone names, values are TZInfo identifiers</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line26">26</a>       MAPPING = {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a>         &quot;International Date Line West&quot; =&gt; &quot;Pacific/Midway&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>         &quot;Midway Island&quot;                =&gt; &quot;Pacific/Midway&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a>         &quot;Samoa&quot;                        =&gt; &quot;Pacific/Pago_Pago&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a>         &quot;Hawaii&quot;                       =&gt; &quot;Pacific/Honolulu&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line31">31</a>         &quot;Alaska&quot;                       =&gt; &quot;America/Juneau&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a>         &quot;Pacific Time (US &amp; Canada)&quot;   =&gt; &quot;America/Los_Angeles&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line33">33</a>         &quot;Tijuana&quot;                      =&gt; &quot;America/Tijuana&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a>         &quot;Mountain Time (US &amp; Canada)&quot;  =&gt; &quot;America/Denver&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line35">35</a>         &quot;Arizona&quot;                      =&gt; &quot;America/Phoenix&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line36">36</a>         &quot;Chihuahua&quot;                    =&gt; &quot;America/Chihuahua&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a>         &quot;Mazatlan&quot;                     =&gt; &quot;America/Mazatlan&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line38">38</a>         &quot;Central Time (US &amp; Canada)&quot;   =&gt; &quot;America/Chicago&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line39">39</a>         &quot;Saskatchewan&quot;                 =&gt; &quot;America/Regina&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line40">40</a>         &quot;Guadalajara&quot;                  =&gt; &quot;America/Mexico_City&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a>         &quot;Mexico City&quot;                  =&gt; &quot;America/Mexico_City&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>         &quot;Monterrey&quot;                    =&gt; &quot;America/Monterrey&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>         &quot;Central America&quot;              =&gt; &quot;America/Guatemala&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line44">44</a>         &quot;Eastern Time (US &amp; Canada)&quot;   =&gt; &quot;America/New_York&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a>         &quot;Indiana (East)&quot;               =&gt; &quot;America/Indiana/Indianapolis&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a>         &quot;Bogota&quot;                       =&gt; &quot;America/Bogota&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>         &quot;Lima&quot;                         =&gt; &quot;America/Lima&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line48">48</a>         &quot;Quito&quot;                        =&gt; &quot;America/Lima&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a>         &quot;Atlantic Time (Canada)&quot;       =&gt; &quot;America/Halifax&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>         &quot;Caracas&quot;                      =&gt; &quot;America/Caracas&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>         &quot;La Paz&quot;                       =&gt; &quot;America/La_Paz&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a>         &quot;Santiago&quot;                     =&gt; &quot;America/Santiago&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>         &quot;Newfoundland&quot;                 =&gt; &quot;America/St_Johns&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>         &quot;Brasilia&quot;                     =&gt; &quot;America/Sao_Paulo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>         &quot;Buenos Aires&quot;                 =&gt; &quot;America/Argentina/Buenos_Aires&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>         &quot;Georgetown&quot;                   =&gt; &quot;America/Argentina/San_Juan&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a>         &quot;Greenland&quot;                    =&gt; &quot;America/Godthab&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a>         &quot;Mid-Atlantic&quot;                 =&gt; &quot;Atlantic/South_Georgia&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>         &quot;Azores&quot;                       =&gt; &quot;Atlantic/Azores&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a>         &quot;Cape Verde Is.&quot;               =&gt; &quot;Atlantic/Cape_Verde&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>         &quot;Dublin&quot;                       =&gt; &quot;Europe/Dublin&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>         &quot;Edinburgh&quot;                    =&gt; &quot;Europe/Dublin&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>         &quot;Lisbon&quot;                       =&gt; &quot;Europe/Lisbon&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line64">64</a>         &quot;London&quot;                       =&gt; &quot;Europe/London&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a>         &quot;Casablanca&quot;                   =&gt; &quot;Africa/Casablanca&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>         &quot;Monrovia&quot;                     =&gt; &quot;Africa/Monrovia&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>         &quot;UTC&quot;                          =&gt; &quot;Etc/UTC&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>         &quot;Belgrade&quot;                     =&gt; &quot;Europe/Belgrade&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>         &quot;Bratislava&quot;                   =&gt; &quot;Europe/Bratislava&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line70">70</a>         &quot;Budapest&quot;                     =&gt; &quot;Europe/Budapest&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>         &quot;Ljubljana&quot;                    =&gt; &quot;Europe/Ljubljana&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>         &quot;Prague&quot;                       =&gt; &quot;Europe/Prague&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a>         &quot;Sarajevo&quot;                     =&gt; &quot;Europe/Sarajevo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>         &quot;Skopje&quot;                       =&gt; &quot;Europe/Skopje&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a>         &quot;Warsaw&quot;                       =&gt; &quot;Europe/Warsaw&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a>         &quot;Zagreb&quot;                       =&gt; &quot;Europe/Zagreb&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a>         &quot;Brussels&quot;                     =&gt; &quot;Europe/Brussels&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>         &quot;Copenhagen&quot;                   =&gt; &quot;Europe/Copenhagen&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line79">79</a>         &quot;Madrid&quot;                       =&gt; &quot;Europe/Madrid&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line80">80</a>         &quot;Paris&quot;                        =&gt; &quot;Europe/Paris&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line81">81</a>         &quot;Amsterdam&quot;                    =&gt; &quot;Europe/Amsterdam&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line82">82</a>         &quot;Berlin&quot;                       =&gt; &quot;Europe/Berlin&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line83">83</a>         &quot;Bern&quot;                         =&gt; &quot;Europe/Berlin&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line84">84</a>         &quot;Rome&quot;                         =&gt; &quot;Europe/Rome&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line85">85</a>         &quot;Stockholm&quot;                    =&gt; &quot;Europe/Stockholm&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line86">86</a>         &quot;Vienna&quot;                       =&gt; &quot;Europe/Vienna&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line87">87</a>         &quot;West Central Africa&quot;          =&gt; &quot;Africa/Algiers&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line88">88</a>         &quot;Bucharest&quot;                    =&gt; &quot;Europe/Bucharest&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line89">89</a>         &quot;Cairo&quot;                        =&gt; &quot;Africa/Cairo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line90">90</a>         &quot;Helsinki&quot;                     =&gt; &quot;Europe/Helsinki&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line91">91</a>         &quot;Kyev&quot;                         =&gt; &quot;Europe/Kiev&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line92">92</a>         &quot;Riga&quot;                         =&gt; &quot;Europe/Riga&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line93">93</a>         &quot;Sofia&quot;                        =&gt; &quot;Europe/Sofia&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>         &quot;Tallinn&quot;                      =&gt; &quot;Europe/Tallinn&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line95">95</a>         &quot;Vilnius&quot;                      =&gt; &quot;Europe/Vilnius&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a>         &quot;Athens&quot;                       =&gt; &quot;Europe/Athens&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line97">97</a>         &quot;Istanbul&quot;                     =&gt; &quot;Europe/Istanbul&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a>         &quot;Minsk&quot;                        =&gt; &quot;Europe/Minsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a>         &quot;Jerusalem&quot;                    =&gt; &quot;Asia/Jerusalem&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>         &quot;Harare&quot;                       =&gt; &quot;Africa/Harare&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>         &quot;Pretoria&quot;                     =&gt; &quot;Africa/Johannesburg&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line102">102</a>         &quot;Moscow&quot;                       =&gt; &quot;Europe/Moscow&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line103">103</a>         &quot;St. Petersburg&quot;               =&gt; &quot;Europe/Moscow&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line104">104</a>         &quot;Volgograd&quot;                    =&gt; &quot;Europe/Moscow&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line105">105</a>         &quot;Kuwait&quot;                       =&gt; &quot;Asia/Kuwait&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line106">106</a>         &quot;Riyadh&quot;                       =&gt; &quot;Asia/Riyadh&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line107">107</a>         &quot;Nairobi&quot;                      =&gt; &quot;Africa/Nairobi&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line108">108</a>         &quot;Baghdad&quot;                      =&gt; &quot;Asia/Baghdad&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line109">109</a>         &quot;Tehran&quot;                       =&gt; &quot;Asia/Tehran&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line110">110</a>         &quot;Abu Dhabi&quot;                    =&gt; &quot;Asia/Muscat&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line111">111</a>         &quot;Muscat&quot;                       =&gt; &quot;Asia/Muscat&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line112">112</a>         &quot;Baku&quot;                         =&gt; &quot;Asia/Baku&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line113">113</a>         &quot;Tbilisi&quot;                      =&gt; &quot;Asia/Tbilisi&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line114">114</a>         &quot;Yerevan&quot;                      =&gt; &quot;Asia/Yerevan&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line115">115</a>         &quot;Kabul&quot;                        =&gt; &quot;Asia/Kabul&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line116">116</a>         &quot;Ekaterinburg&quot;                 =&gt; &quot;Asia/Yekaterinburg&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line117">117</a>         &quot;Islamabad&quot;                    =&gt; &quot;Asia/Karachi&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line118">118</a>         &quot;Karachi&quot;                      =&gt; &quot;Asia/Karachi&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line119">119</a>         &quot;Tashkent&quot;                     =&gt; &quot;Asia/Tashkent&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line120">120</a>         &quot;Chennai&quot;                      =&gt; &quot;Asia/Kolkata&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line121">121</a>         &quot;Kolkata&quot;                      =&gt; &quot;Asia/Kolkata&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line122">122</a>         &quot;Mumbai&quot;                       =&gt; &quot;Asia/Kolkata&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a>         &quot;New Delhi&quot;                    =&gt; &quot;Asia/Kolkata&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line124">124</a>         &quot;Kathmandu&quot;                    =&gt; &quot;Asia/Katmandu&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line125">125</a>         &quot;Astana&quot;                       =&gt; &quot;Asia/Dhaka&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line126">126</a>         &quot;Dhaka&quot;                        =&gt; &quot;Asia/Dhaka&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line127">127</a>         &quot;Sri Jayawardenepura&quot;          =&gt; &quot;Asia/Colombo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line128">128</a>         &quot;Almaty&quot;                       =&gt; &quot;Asia/Almaty&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line129">129</a>         &quot;Novosibirsk&quot;                  =&gt; &quot;Asia/Novosibirsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line130">130</a>         &quot;Rangoon&quot;                      =&gt; &quot;Asia/Rangoon&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line131">131</a>         &quot;Bangkok&quot;                      =&gt; &quot;Asia/Bangkok&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line132">132</a>         &quot;Hanoi&quot;                        =&gt; &quot;Asia/Bangkok&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line133">133</a>         &quot;Jakarta&quot;                      =&gt; &quot;Asia/Jakarta&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line134">134</a>         &quot;Krasnoyarsk&quot;                  =&gt; &quot;Asia/Krasnoyarsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line135">135</a>         &quot;Beijing&quot;                      =&gt; &quot;Asia/Shanghai&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line136">136</a>         &quot;Chongqing&quot;                    =&gt; &quot;Asia/Chongqing&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line137">137</a>         &quot;Hong Kong&quot;                    =&gt; &quot;Asia/Hong_Kong&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line138">138</a>         &quot;Urumqi&quot;                       =&gt; &quot;Asia/Urumqi&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line139">139</a>         &quot;Kuala Lumpur&quot;                 =&gt; &quot;Asia/Kuala_Lumpur&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line140">140</a>         &quot;Singapore&quot;                    =&gt; &quot;Asia/Singapore&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a>         &quot;Taipei&quot;                       =&gt; &quot;Asia/Taipei&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line142">142</a>         &quot;Perth&quot;                        =&gt; &quot;Australia/Perth&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line143">143</a>         &quot;Irkutsk&quot;                      =&gt; &quot;Asia/Irkutsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line144">144</a>         &quot;Ulaan Bataar&quot;                 =&gt; &quot;Asia/Ulaanbaatar&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line145">145</a>         &quot;Seoul&quot;                        =&gt; &quot;Asia/Seoul&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line146">146</a>         &quot;Osaka&quot;                        =&gt; &quot;Asia/Tokyo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line147">147</a>         &quot;Sapporo&quot;                      =&gt; &quot;Asia/Tokyo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line148">148</a>         &quot;Tokyo&quot;                        =&gt; &quot;Asia/Tokyo&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line149">149</a>         &quot;Yakutsk&quot;                      =&gt; &quot;Asia/Yakutsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line150">150</a>         &quot;Darwin&quot;                       =&gt; &quot;Australia/Darwin&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line151">151</a>         &quot;Adelaide&quot;                     =&gt; &quot;Australia/Adelaide&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line152">152</a>         &quot;Canberra&quot;                     =&gt; &quot;Australia/Melbourne&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line153">153</a>         &quot;Melbourne&quot;                    =&gt; &quot;Australia/Melbourne&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line154">154</a>         &quot;Sydney&quot;                       =&gt; &quot;Australia/Sydney&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line155">155</a>         &quot;Brisbane&quot;                     =&gt; &quot;Australia/Brisbane&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line156">156</a>         &quot;Hobart&quot;                       =&gt; &quot;Australia/Hobart&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line157">157</a>         &quot;Vladivostok&quot;                  =&gt; &quot;Asia/Vladivostok&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line158">158</a>         &quot;Guam&quot;                         =&gt; &quot;Pacific/Guam&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line159">159</a>         &quot;Port Moresby&quot;                 =&gt; &quot;Pacific/Port_Moresby&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line160">160</a>         &quot;Magadan&quot;                      =&gt; &quot;Asia/Magadan&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line161">161</a>         &quot;Solomon Is.&quot;                  =&gt; &quot;Asia/Magadan&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line162">162</a>         &quot;New Caledonia&quot;                =&gt; &quot;Pacific/Noumea&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line163">163</a>         &quot;Fiji&quot;                         =&gt; &quot;Pacific/Fiji&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line164">164</a>         &quot;Kamchatka&quot;                    =&gt; &quot;Asia/Kamchatka&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line165">165</a>         &quot;Marshall Is.&quot;                 =&gt; &quot;Pacific/Majuro&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line166">166</a>         &quot;Auckland&quot;                     =&gt; &quot;Pacific/Auckland&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line167">167</a>         &quot;Wellington&quot;                   =&gt; &quot;Pacific/Auckland&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line168">168</a>         &quot;Nuku'alofa&quot;                   =&gt; &quot;Pacific/Tongatapu&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line169">169</a>       }.each { |name, zone| name.freeze; zone.freeze }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line170">170</a>       MAPPING.freeze</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line171">171</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line172">172</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line173">173</a>     include Comparable</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line174">174</a>     attr_reader :name</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line175">175</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line176">176</a>     # Create a new TimeZone object with the given name and offset. The</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line177">177</a>     # offset is the number of seconds that this time zone is offset from UTC</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line178">178</a>     # (GMT). Seconds were chosen as the offset unit because that is the unit that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line179">179</a>     # Ruby uses to represent time zone offsets (see Time#utc_offset).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line180">180</a>     def initialize(name, utc_offset, tzinfo = nil)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line181">181</a>       @name = name</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line182">182</a>       @utc_offset = utc_offset</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line183">183</a>       @tzinfo = tzinfo</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line184">184</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line185">185</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line186">186</a>     def utc_offset</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line187">187</a>       @utc_offset ||= tzinfo.current_period.utc_offset</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line188">188</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line189">189</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line190">190</a>     # Returns the offset of this time zone as a formatted string, of the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line191">191</a>     # format &quot;+HH:MM&quot;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line192">192</a>     def formatted_offset(colon=true, alternate_utc_string = nil)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line193">193</a>       utc_offset == 0 &amp;&amp; alternate_utc_string || utc_offset.to_utc_offset_s(colon)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line194">194</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line195">195</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line196">196</a>     # Compare this time zone to the parameter. The two are comapred first on</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line197">197</a>     # their offsets, and then by name.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line198">198</a>     def &lt;=&gt;(zone)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line199">199</a>       result = (utc_offset &lt;=&gt; zone.utc_offset)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line200">200</a>       result = (name &lt;=&gt; zone.name) if result == 0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line201">201</a>       result</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line202">202</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line203">203</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line204">204</a>     # Compare #name and TZInfo identifier to a supplied regexp, returning true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line205">205</a>     # if a match is found.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line206">206</a>     def =~(re)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line207">207</a>       return true if name =~ re || MAPPING[name] =~ re</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line208">208</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line209">209</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line210">210</a>     # Returns a textual representation of this time zone.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line211">211</a>     def to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line212">212</a>       &quot;(GMT#{formatted_offset}) #{name}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line213">213</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line214">214</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line215">215</a>     # Method for creating new ActiveSupport::TimeWithZone instance in time zone of +self+ from given values. Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line216">216</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line217">217</a>     #   Time.zone = &quot;Hawaii&quot;                      # =&gt; &quot;Hawaii&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line218">218</a>     #   Time.zone.local(2007, 2, 1, 15, 30, 45)   # =&gt; Thu, 01 Feb 2007 15:30:45 HST -10:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line219">219</a>     def local(*args)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line220">220</a>       time = Time.utc_time(*args)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line221">221</a>       ActiveSupport::TimeWithZone.new(nil, self, time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line222">222</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line223">223</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line224">224</a>     # Method for creating new ActiveSupport::TimeWithZone instance in time zone of +self+ from number of seconds since the Unix epoch. Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line225">225</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line226">226</a>     #   Time.zone = &quot;Hawaii&quot;        # =&gt; &quot;Hawaii&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line227">227</a>     #   Time.utc(2000).to_f         # =&gt; 946684800.0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line228">228</a>     #   Time.zone.at(946684800.0)   # =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line229">229</a>     def at(secs)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line230">230</a>       utc = Time.at(secs).utc rescue DateTime.civil(1970).since(secs)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line231">231</a>       utc.in_time_zone(self)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line232">232</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line233">233</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line234">234</a>     # Method for creating new ActiveSupport::TimeWithZone instance in time zone of +self+ from parsed string. Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line235">235</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line236">236</a>     #   Time.zone = &quot;Hawaii&quot;                      # =&gt; &quot;Hawaii&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line237">237</a>     #   Time.zone.parse('1999-12-31 14:00:00')    # =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line238">238</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line239">239</a>     # If upper components are missing from the string, they are supplied from TimeZone#now:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line240">240</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line241">241</a>     #   Time.zone.now                 # =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line242">242</a>     #   Time.zone.parse('22:30:00')   # =&gt; Fri, 31 Dec 1999 22:30:00 HST -10:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line243">243</a>     def parse(str, now=now)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line244">244</a>       date_parts = Date._parse(str)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line245">245</a>       return if date_parts.blank?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line246">246</a>       time = Time.parse(str, now) rescue DateTime.parse(str)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line247">247</a>       if date_parts[:offset].nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line248">248</a>         ActiveSupport::TimeWithZone.new(nil, self, time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line249">249</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line250">250</a>         time.in_time_zone(self)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line251">251</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line252">252</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line253">253</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line254">254</a>     # Returns an ActiveSupport::TimeWithZone instance representing the current time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line255">255</a>     # in the time zone represented by +self+. Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line256">256</a>     #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line257">257</a>     #   Time.zone = 'Hawaii'  # =&gt; &quot;Hawaii&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line258">258</a>     #   Time.zone.now         # =&gt; Wed, 23 Jan 2008 20:24:27 HST -10:00</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line259">259</a>     def now</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line260">260</a>       Time.now.utc.in_time_zone(self)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line261">261</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line262">262</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line263">263</a>     # Return the current date in this time zone.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line264">264</a>     def today</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line265">265</a>       tzinfo.now.to_date</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line266">266</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line267">267</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line268">268</a>     # Adjust the given time to the simultaneous time in the time zone represented by +self+. Returns a</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line269">269</a>     # Time.utc() instance -- if you want an ActiveSupport::TimeWithZone instance, use Time#in_time_zone() instead.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line270">270</a>     def utc_to_local(time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line271">271</a>       tzinfo.utc_to_local(time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line272">272</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line273">273</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line274">274</a>     # Adjust the given time to the simultaneous time in UTC. Returns a Time.utc() instance.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line275">275</a>     def local_to_utc(time, dst=true)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line276">276</a>       tzinfo.local_to_utc(time, dst)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line277">277</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line278">278</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line279">279</a>     # Available so that TimeZone instances respond like TZInfo::Timezone instances</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line280">280</a>     def period_for_utc(time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line281">281</a>       tzinfo.period_for_utc(time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line282">282</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line283">283</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line284">284</a>     # Available so that TimeZone instances respond like TZInfo::Timezone instances</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line285">285</a>     def period_for_local(time, dst=true)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line286">286</a>       tzinfo.period_for_local(time, dst)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line287">287</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line288">288</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line289">289</a>     # TODO: Preload instead of lazy load for thread safety</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line290">290</a>     def tzinfo</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line291">291</a>       require 'tzinfo' unless defined?(TZInfo)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line292">292</a>       @tzinfo ||= TZInfo::Timezone.get(MAPPING[name])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line293">293</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line294">294</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line295">295</a>     unless const_defined?(:ZONES)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line296">296</a>       ZONES = []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line297">297</a>       ZONES_MAP = {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line298">298</a>       [[-39_600, &quot;International Date Line West&quot;, &quot;Midway Island&quot;, &quot;Samoa&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line299">299</a>        [-36_000, &quot;Hawaii&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line300">300</a>        [-32_400, &quot;Alaska&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line301">301</a>        [-28_800, &quot;Pacific Time (US &amp; Canada)&quot;, &quot;Tijuana&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line302">302</a>        [-25_200, &quot;Mountain Time (US &amp; Canada)&quot;, &quot;Chihuahua&quot;, &quot;Mazatlan&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line303">303</a>                  &quot;Arizona&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line304">304</a>        [-21_600, &quot;Central Time (US &amp; Canada)&quot;, &quot;Saskatchewan&quot;, &quot;Guadalajara&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line305">305</a>                  &quot;Mexico City&quot;, &quot;Monterrey&quot;, &quot;Central America&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line306">306</a>        [-18_000, &quot;Eastern Time (US &amp; Canada)&quot;, &quot;Indiana (East)&quot;, &quot;Bogota&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line307">307</a>                  &quot;Lima&quot;, &quot;Quito&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line308">308</a>        [-16_200, &quot;Caracas&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line309">309</a>        [-14_400, &quot;Atlantic Time (Canada)&quot;, &quot;La Paz&quot;, &quot;Santiago&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line310">310</a>        [-12_600, &quot;Newfoundland&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line311">311</a>        [-10_800, &quot;Brasilia&quot;, &quot;Buenos Aires&quot;, &quot;Georgetown&quot;, &quot;Greenland&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line312">312</a>        [ -7_200, &quot;Mid-Atlantic&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line313">313</a>        [ -3_600, &quot;Azores&quot;, &quot;Cape Verde Is.&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line314">314</a>        [      0, &quot;Dublin&quot;, &quot;Edinburgh&quot;, &quot;Lisbon&quot;, &quot;London&quot;, &quot;Casablanca&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line315">315</a>                  &quot;Monrovia&quot;, &quot;UTC&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line316">316</a>        [  3_600, &quot;Belgrade&quot;, &quot;Bratislava&quot;, &quot;Budapest&quot;, &quot;Ljubljana&quot;, &quot;Prague&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line317">317</a>                  &quot;Sarajevo&quot;, &quot;Skopje&quot;, &quot;Warsaw&quot;, &quot;Zagreb&quot;, &quot;Brussels&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line318">318</a>                  &quot;Copenhagen&quot;, &quot;Madrid&quot;, &quot;Paris&quot;, &quot;Amsterdam&quot;, &quot;Berlin&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line319">319</a>                  &quot;Bern&quot;, &quot;Rome&quot;, &quot;Stockholm&quot;, &quot;Vienna&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line320">320</a>                  &quot;West Central Africa&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line321">321</a>        [  7_200, &quot;Bucharest&quot;, &quot;Cairo&quot;, &quot;Helsinki&quot;, &quot;Kyev&quot;, &quot;Riga&quot;, &quot;Sofia&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line322">322</a>                  &quot;Tallinn&quot;, &quot;Vilnius&quot;, &quot;Athens&quot;, &quot;Istanbul&quot;, &quot;Minsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line323">323</a>                  &quot;Jerusalem&quot;, &quot;Harare&quot;, &quot;Pretoria&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line324">324</a>        [ 10_800, &quot;Moscow&quot;, &quot;St. Petersburg&quot;, &quot;Volgograd&quot;, &quot;Kuwait&quot;, &quot;Riyadh&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line325">325</a>                  &quot;Nairobi&quot;, &quot;Baghdad&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line326">326</a>        [ 12_600, &quot;Tehran&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line327">327</a>        [ 14_400, &quot;Abu Dhabi&quot;, &quot;Muscat&quot;, &quot;Baku&quot;, &quot;Tbilisi&quot;, &quot;Yerevan&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line328">328</a>        [ 16_200, &quot;Kabul&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line329">329</a>        [ 18_000, &quot;Ekaterinburg&quot;, &quot;Islamabad&quot;, &quot;Karachi&quot;, &quot;Tashkent&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line330">330</a>        [ 19_800, &quot;Chennai&quot;, &quot;Kolkata&quot;, &quot;Mumbai&quot;, &quot;New Delhi&quot;, &quot;Sri Jayawardenepura&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line331">331</a>        [ 20_700, &quot;Kathmandu&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line332">332</a>        [ 21_600, &quot;Astana&quot;, &quot;Dhaka&quot;, &quot;Almaty&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line333">333</a>                  &quot;Novosibirsk&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line334">334</a>        [ 23_400, &quot;Rangoon&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line335">335</a>        [ 25_200, &quot;Bangkok&quot;, &quot;Hanoi&quot;, &quot;Jakarta&quot;, &quot;Krasnoyarsk&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line336">336</a>        [ 28_800, &quot;Beijing&quot;, &quot;Chongqing&quot;, &quot;Hong Kong&quot;, &quot;Urumqi&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line337">337</a>                  &quot;Kuala Lumpur&quot;, &quot;Singapore&quot;, &quot;Taipei&quot;, &quot;Perth&quot;, &quot;Irkutsk&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line338">338</a>                  &quot;Ulaan Bataar&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line339">339</a>        [ 32_400, &quot;Seoul&quot;, &quot;Osaka&quot;, &quot;Sapporo&quot;, &quot;Tokyo&quot;, &quot;Yakutsk&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line340">340</a>        [ 34_200, &quot;Darwin&quot;, &quot;Adelaide&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line341">341</a>        [ 36_000, &quot;Canberra&quot;, &quot;Melbourne&quot;, &quot;Sydney&quot;, &quot;Brisbane&quot;, &quot;Hobart&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line342">342</a>                  &quot;Vladivostok&quot;, &quot;Guam&quot;, &quot;Port Moresby&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line343">343</a>        [ 39_600, &quot;Magadan&quot;, &quot;Solomon Is.&quot;, &quot;New Caledonia&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line344">344</a>        [ 43_200, &quot;Fiji&quot;, &quot;Kamchatka&quot;, &quot;Marshall Is.&quot;, &quot;Auckland&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line345">345</a>                  &quot;Wellington&quot; ],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line346">346</a>        [ 46_800, &quot;Nuku'alofa&quot; ]].</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line347">347</a>       each do |offset, *places|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line348">348</a>         places.each do |place|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line349">349</a>           place.freeze</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line350">350</a>           zone = new(place, offset)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line351">351</a>           ZONES &lt;&lt; zone</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line352">352</a>           ZONES_MAP[place] = zone</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line353">353</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line354">354</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line355">355</a>       ZONES.sort!</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line356">356</a>       ZONES.freeze</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line357">357</a>       ZONES_MAP.freeze</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line358">358</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line359">359</a>       US_ZONES = ZONES.find_all { |z| z.name =~ /US|Arizona|Indiana|Hawaii|Alaska/ }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line360">360</a>       US_ZONES.freeze</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line361">361</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line362">362</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line363">363</a>     class &lt;&lt; self</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line364">364</a>       alias_method :create, :new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line365">365</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line366">366</a>       # Return a TimeZone instance with the given name, or +nil+ if no</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line367">367</a>       # such TimeZone instance exists. (This exists to support the use of</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line368">368</a>       # this class with the +composed_of+ macro.)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line369">369</a>       def new(name)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line370">370</a>         self[name]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line371">371</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line372">372</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line373">373</a>       # Return an array of all TimeZone objects. There are multiple</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line374">374</a>       # TimeZone objects per time zone, in many cases, to make it easier</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line375">375</a>       # for users to find their own time zone.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line376">376</a>       def all</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line377">377</a>         ZONES</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line378">378</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line379">379</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line380">380</a>       # Locate a specific time zone object. If the argument is a string, it</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line381">381</a>       # is interpreted to mean the name of the timezone to locate. If it is a</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line382">382</a>       # numeric value it is either the hour offset, or the second offset, of the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line383">383</a>       # timezone to find. (The first one with that offset will be returned.)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line384">384</a>       # Returns +nil+ if no such time zone is known to the system.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line385">385</a>       def [](arg)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line386">386</a>         case arg</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line387">387</a>           when String</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line388">388</a>             ZONES_MAP[arg]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line389">389</a>           when Numeric, ActiveSupport::Duration</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line390">390</a>             arg *= 3600 if arg.abs &lt;= 13</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line391">391</a>             all.find { |z| z.utc_offset == arg.to_i }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line392">392</a>           else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line393">393</a>             raise ArgumentError, &quot;invalid argument to TimeZone[]: #{arg.inspect}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line394">394</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line395">395</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line396">396</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line397">397</a>       # A convenience method for returning a collection of TimeZone objects</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line398">398</a>       # for time zones in the USA.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line399">399</a>       def us_zones</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line400">400</a>         US_ZONES</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line401">401</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line402">402</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line403">403</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line404">404</a> end</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+
+    <p>Generated on Sat Oct 10 16:43:27 -0400 2009 with <a href="http://github.com/relevance/rcov">rcov 0.9.3</a></p>
+
+  </body>
+</html>

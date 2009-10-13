@@ -16,7 +16,7 @@ class RRD
     elsif type == 'rra_type' # only RRA types (accepted values are AVERAGE, MIN, MAX, LAST
        str = string.to_s.match( /(AVERAGE|MIN|MAX|LAST)/ )[0] rescue RuntimeError
     elsif type == 'path' # sanitizes the PATH of the RRD db will match test.rrd and /path/test.rrd
-       str = string.to_s.gsub(';', '')
+       str = string.to_s.gsub(';', '').gsub('`', '')
     elsif type == 'imagetype'
        str = string.to_s.match(/(PNG|SVG|EPS|PDF)/)[0] rescue RuntimeError #[-a|--imgformat PNG|SVG|EPS|PDF]
     elsif type == 'rpn'

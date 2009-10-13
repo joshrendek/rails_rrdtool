@@ -1,0 +1,3891 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>/Library/Ruby/Gems/1.8/gems/actionpack-2.3.3/lib/action_view/helpers/url_helper.rb</title>
+    <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="print.css" media="print" rel="stylesheet" type="text/css" />
+    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="rcov.js"></script>
+  </head>
+  <body>
+    <h1>Rails Rrdtool C0 Coverage Information - RCov</h1>
+    <h2>/Library/Ruby/Gems/1.8/gems/actionpack-2.3.3/lib/action_view/helpers/url_helper.rb</h2>
+
+    
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="-Library-Ruby-Gems-1_8-gems-actionpack-2_3_3-lib-action_view-helpers-url_helper_rb.html">/Library/Ruby/Gems/1.8/gems/actionpack-2.3.3/lib/action_view/helpers/url_helper.rb</a></td>
+            <td class='right_align'><tt>638</tt></td>
+            <td class='right_align'><tt>182</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>70.53%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:71px"></div>
+            <div class="uncovered" style="width:29px"></div>
+          </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>9.89%</tt></div>
+          <div class="percent_graph">
+            <div class="covered" style="width:10px"></div>
+            <div class="uncovered" style="width:90px"></div>
+          </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Key</h3>
+    
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line1">1</a> #require 'action_view/helpers/javascript_helper'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line2">2</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line3">3</a> module ActionView</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line4">4</a>   module Helpers #:nodoc:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line5">5</a>     # Provides a set of methods for making links and getting URLs that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line6">6</a>     # depend on the routing subsystem (see ActionController::Routing).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line7">7</a>     # This allows you to use the same format for links in views</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line8">8</a>     # and controllers.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line9">9</a>     module UrlHelper</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line10">10</a>       include JavaScriptHelper</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a>       # Returns the URL for the set of +options+ provided. This takes the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line13">13</a>       # same options as +url_for+ in Action Controller (see the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line14">14</a>       # documentation for ActionController::Base#url_for). Note that by default</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a>       # &lt;tt&gt;:only_path&lt;/tt&gt; is &lt;tt&gt;true&lt;/tt&gt; so you'll get the relative /controller/action</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line16">16</a>       # instead of the fully qualified URL like http://example.com/controller/action.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a>       # When called from a view, url_for returns an HTML escaped url. If you</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a>       # need an unescaped url, pass &lt;tt&gt;:escape =&gt; false&lt;/tt&gt; in the +options+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line20">20</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line21">21</a>       # ==== Options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line22">22</a>       # * &lt;tt&gt;:anchor&lt;/tt&gt; - Specifies the anchor name to be appended to the path.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a>       # * &lt;tt&gt;:only_path&lt;/tt&gt; - If true, returns the relative URL (omitting the protocol, host name, and port) (&lt;tt&gt;true&lt;/tt&gt; by default unless &lt;tt&gt;:host&lt;/tt&gt; is specified).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a>       # * &lt;tt&gt;:trailing_slash&lt;/tt&gt; - If true, adds a trailing slash, as in &quot;/archive/2005/&quot;. Note that this</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a>       #   is currently not recommended since it breaks caching.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line26">26</a>       # * &lt;tt&gt;:host&lt;/tt&gt; - Overrides the default (current) host if provided.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a>       # * &lt;tt&gt;:protocol&lt;/tt&gt; - Overrides the default (current) protocol if provided.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>       # * &lt;tt&gt;:user&lt;/tt&gt; - Inline HTTP authentication (only plucked out if &lt;tt&gt;:password&lt;/tt&gt; is also present).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a>       # * &lt;tt&gt;:password&lt;/tt&gt; - Inline HTTP authentication (only plucked out if &lt;tt&gt;:user&lt;/tt&gt; is also present).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a>       # * &lt;tt&gt;:escape&lt;/tt&gt; - Determines whether the returned URL will be HTML escaped or not (&lt;tt&gt;true&lt;/tt&gt; by default).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line31">31</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a>       # ==== Relying on named routes</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line33">33</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a>       # If you instead of a hash pass a record (like an Active Record or Active Resource) as the options parameter,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line35">35</a>       # you'll trigger the named route for that record. The lookup will happen on the name of the class. So passing</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line36">36</a>       # a Workshop object will attempt to use the workshop_path route. If you have a nested route, such as</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a>       # admin_workshop_path you'll have to call that explicitly (it's impossible for url_for to guess that route).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line38">38</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line39">39</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line40">40</a>       #   &lt;%= url_for(:action =&gt; 'index') %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a>       #   # =&gt; /blog/</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>       #   &lt;%= url_for(:action =&gt; 'find', :controller =&gt; 'books') %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line44">44</a>       #   # =&gt; /books/find</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a>       #   &lt;%= url_for(:action =&gt; 'login', :controller =&gt; 'members', :only_path =&gt; false, :protocol =&gt; 'https') %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>       #   # =&gt; https://www.railsapplication.com/members/login/</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line48">48</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a>       #   &lt;%= url_for(:action =&gt; 'play', :anchor =&gt; 'player') %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>       #   # =&gt; /messages/play/#player</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a>       #   &lt;%= url_for(:action =&gt; 'checkout', :anchor =&gt; 'tax&amp;ship') %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>       #   # =&gt; /testing/jump/#tax&amp;amp;ship</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>       #   &lt;%= url_for(:action =&gt; 'checkout', :anchor =&gt; 'tax&amp;ship', :escape =&gt; false) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>       #   # =&gt; /testing/jump/#tax&amp;ship</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a>       #   &lt;%= url_for(Workshop.new) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>       #   # relies on Workshop answering a new_record? call (and in this case returning true)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a>       #   # =&gt; /workshops</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>       #   &lt;%= url_for(@workshop) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>       #   # calls @workshop.to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line64">64</a>       #   # =&gt; /workshops/5</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>       #   &lt;%= url_for(&quot;http://www.example.com&quot;) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>       #   # =&gt; http://www.example.com</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>       #   &lt;%= url_for(:back) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line70">70</a>       #   # if request.env[&quot;HTTP_REFERER&quot;] is set to &quot;http://www.example.com&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>       #   # =&gt; http://www.example.com</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a>       #   &lt;%= url_for(:back) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>       #   # if request.env[&quot;HTTP_REFERER&quot;] is not set or is blank</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a>       #   # =&gt; javascript:history.back()</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line76">76</a>       def url_for(options = {})</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line77">77</a>         options ||= {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line78">78</a>         url = case options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line79">79</a>         when String</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line80">80</a>           escape = true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line81">81</a>           options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line82">82</a>         when Hash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line83">83</a>           options = { :only_path =&gt; options[:host].nil? }.update(options.symbolize_keys)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line84">84</a>           escape  = options.key?(:escape) ? options.delete(:escape) : true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line85">85</a>           @controller.send(:url_for, options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line86">86</a>         when :back</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line87">87</a>           escape = false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line88">88</a>           @controller.request.env[&quot;HTTP_REFERER&quot;] || 'javascript:history.back()'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line89">89</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line90">90</a>           escape = false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line91">91</a>           polymorphic_path(options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line92">92</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line93">93</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line94">94</a>         escape ? escape_once(url) : url</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line95">95</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line97">97</a>       # Creates a link tag of the given +name+ using a URL created by the set</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a>       # of +options+. See the valid options in the documentation for</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a>       # url_for. It's also possible to pass a string instead</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>       # of an options hash to get a link tag that uses the value of the string as the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>       # href for the link, or use &lt;tt&gt;:back&lt;/tt&gt; to link to the referrer - a JavaScript back</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line102">102</a>       # link will be used in place of a referrer if none exists. If nil is passed as</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line103">103</a>       # a name, the link itself will become the name.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line104">104</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line105">105</a>       # ==== Signatures</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line106">106</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line107">107</a>       #   link_to(name, options = {}, html_options = nil)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line108">108</a>       #   link_to(options = {}, html_options = nil) do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line109">109</a>       #     # name</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line110">110</a>       #   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line111">111</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line112">112</a>       # ==== Options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line113">113</a>       # * &lt;tt&gt;:confirm =&gt; 'question?'&lt;/tt&gt; - This will add a JavaScript confirm</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line114">114</a>       #   prompt with the question specified. If the user accepts, the link is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line115">115</a>       #   processed normally, otherwise no action is taken.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line116">116</a>       # * &lt;tt&gt;:popup =&gt; true || array of window options&lt;/tt&gt; - This will force the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line117">117</a>       #   link to open in a popup window. By passing true, a default browser window</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line118">118</a>       #   will be opened with the URL. You can also specify an array of options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line119">119</a>       #   that are passed-thru to JavaScripts window.open method.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line120">120</a>       # * &lt;tt&gt;:method =&gt; symbol of HTTP verb&lt;/tt&gt; - This modifier will dynamically</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line121">121</a>       #   create an HTML form and immediately submit the form for processing using</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line122">122</a>       #   the HTTP verb specified. Useful for having links perform a POST operation</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a>       #   in dangerous actions like deleting a record (which search bots can follow</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line124">124</a>       #   while spidering your site). Supported verbs are &lt;tt&gt;:post&lt;/tt&gt;, &lt;tt&gt;:delete&lt;/tt&gt; and &lt;tt&gt;:put&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line125">125</a>       #   Note that if the user has JavaScript disabled, the request will fall back</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line126">126</a>       #   to using GET. If you are relying on the POST behavior, you should check</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line127">127</a>       #   for it in your controller's action by using the request object's methods</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line128">128</a>       #   for &lt;tt&gt;post?&lt;/tt&gt;, &lt;tt&gt;delete?&lt;/tt&gt; or &lt;tt&gt;put?&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line129">129</a>       # * The +html_options+ will accept a hash of html attributes for the link tag.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line130">130</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line131">131</a>       # Note that if the user has JavaScript disabled, the request will fall back</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line132">132</a>       # to using GET. If &lt;tt&gt;:href =&gt; '#'&lt;/tt&gt; is used and the user has JavaScript disabled</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line133">133</a>       # clicking the link will have no effect. If you are relying on the POST</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line134">134</a>       # behavior, your should check for it in your controller's action by using the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line135">135</a>       # request object's methods for &lt;tt&gt;post?&lt;/tt&gt;, &lt;tt&gt;delete?&lt;/tt&gt; or &lt;tt&gt;put?&lt;/tt&gt;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line136">136</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line137">137</a>       # You can mix and match the +html_options+ with the exception of</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line138">138</a>       # &lt;tt&gt;:popup&lt;/tt&gt; and &lt;tt&gt;:method&lt;/tt&gt; which will raise an ActionView::ActionViewError</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line139">139</a>       # exception.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line140">140</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line142">142</a>       # Because it relies on +url_for+, +link_to+ supports both older-style controller/action/id arguments</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line143">143</a>       # and newer RESTful routes.  Current Rails style favors RESTful routes whenever possible, so base</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line144">144</a>       # your application on resources and use</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line145">145</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line146">146</a>       #   link_to &quot;Profile&quot;, profile_path(@profile)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line147">147</a>       #   # =&gt; &lt;a href=&quot;/profiles/1&quot;&gt;Profile&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line148">148</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line149">149</a>       # or the even pithier</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line150">150</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line151">151</a>       #   link_to &quot;Profile&quot;, @profile</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line152">152</a>       #   # =&gt; &lt;a href=&quot;/profiles/1&quot;&gt;Profile&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line153">153</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line154">154</a>       # in place of the older more verbose, non-resource-oriented</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line155">155</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line156">156</a>       #   link_to &quot;Profile&quot;, :controller =&gt; &quot;profiles&quot;, :action =&gt; &quot;show&quot;, :id =&gt; @profile</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line157">157</a>       #   # =&gt; &lt;a href=&quot;/profiles/show/1&quot;&gt;Profile&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line158">158</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line159">159</a>       # Similarly,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line160">160</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line161">161</a>       #   link_to &quot;Profiles&quot;, profiles_path</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line162">162</a>       #   # =&gt; &lt;a href=&quot;/profiles&quot;&gt;Profiles&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line163">163</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line164">164</a>       # is better than</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line165">165</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line166">166</a>       #   link_to &quot;Profiles&quot;, :controller =&gt; &quot;profiles&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line167">167</a>       #   # =&gt; &lt;a href=&quot;/profiles&quot;&gt;Profiles&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line168">168</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line169">169</a>       # You can use a block as well if your link target is hard to fit into the name parameter. ERb example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line170">170</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line171">171</a>       #   &lt;% link_to(@profile) do %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line172">172</a>       #     &lt;strong&gt;&lt;%= @profile.name %&gt;&lt;/strong&gt; -- &lt;span&gt;Check it out!!&lt;/span&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line173">173</a>       #   &lt;% end %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line174">174</a>       #   # =&gt; &lt;a href=&quot;/profiles/1&quot;&gt;&lt;strong&gt;David&lt;/strong&gt; -- &lt;span&gt;Check it out!!&lt;/span&gt;&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line175">175</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line176">176</a>       # Classes and ids for CSS are easy to produce:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line177">177</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line178">178</a>       #   link_to &quot;Articles&quot;, articles_path, :id =&gt; &quot;news&quot;, :class =&gt; &quot;article&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line179">179</a>       #   # =&gt; &lt;a href=&quot;/articles&quot; class=&quot;article&quot; id=&quot;news&quot;&gt;Articles&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line180">180</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line181">181</a>       # Be careful when using the older argument style, as an extra literal hash is needed:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line182">182</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line183">183</a>       #   link_to &quot;Articles&quot;, { :controller =&gt; &quot;articles&quot; }, :id =&gt; &quot;news&quot;, :class =&gt; &quot;article&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line184">184</a>       #   # =&gt; &lt;a href=&quot;/articles&quot; class=&quot;article&quot; id=&quot;news&quot;&gt;Articles&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line185">185</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line186">186</a>       # Leaving the hash off gives the wrong link:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line187">187</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line188">188</a>       #   link_to &quot;WRONG!&quot;, :controller =&gt; &quot;articles&quot;, :id =&gt; &quot;news&quot;, :class =&gt; &quot;article&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line189">189</a>       #   # =&gt; &lt;a href=&quot;/articles/index/news?class=article&quot;&gt;WRONG!&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line190">190</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line191">191</a>       # +link_to+ can also produce links with anchors or query strings:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line192">192</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line193">193</a>       #   link_to &quot;Comment wall&quot;, profile_path(@profile, :anchor =&gt; &quot;wall&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line194">194</a>       #   # =&gt; &lt;a href=&quot;/profiles/1#wall&quot;&gt;Comment wall&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line195">195</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line196">196</a>       #   link_to &quot;Ruby on Rails search&quot;, :controller =&gt; &quot;searches&quot;, :query =&gt; &quot;ruby on rails&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line197">197</a>       #   # =&gt; &lt;a href=&quot;/searches?query=ruby+on+rails&quot;&gt;Ruby on Rails search&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line198">198</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line199">199</a>       #   link_to &quot;Nonsense search&quot;, searches_path(:foo =&gt; &quot;bar&quot;, :baz =&gt; &quot;quux&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line200">200</a>       #   # =&gt; &lt;a href=&quot;/searches?foo=bar&amp;amp;baz=quux&quot;&gt;Nonsense search&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line201">201</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line202">202</a>       # The three options specific to +link_to+ (&lt;tt&gt;:confirm&lt;/tt&gt;, &lt;tt&gt;:popup&lt;/tt&gt;, and &lt;tt&gt;:method&lt;/tt&gt;) are used as follows:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line203">203</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line204">204</a>       #   link_to &quot;Visit Other Site&quot;, &quot;http://www.rubyonrails.org/&quot;, :confirm =&gt; &quot;Are you sure?&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line205">205</a>       #   # =&gt; &lt;a href=&quot;http://www.rubyonrails.org/&quot; onclick=&quot;return confirm('Are you sure?');&quot;&gt;Visit Other Site&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line206">206</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line207">207</a>       #   link_to &quot;Help&quot;, { :action =&gt; &quot;help&quot; }, :popup =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line208">208</a>       #   # =&gt; &lt;a href=&quot;/testing/help/&quot; onclick=&quot;window.open(this.href);return false;&quot;&gt;Help&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line209">209</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line210">210</a>       #   link_to &quot;View Image&quot;, @image, :popup =&gt; ['new_window_name', 'height=300,width=600']</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line211">211</a>       #   # =&gt; &lt;a href=&quot;/images/9&quot; onclick=&quot;window.open(this.href,'new_window_name','height=300,width=600');return false;&quot;&gt;View Image&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line212">212</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line213">213</a>       #   link_to &quot;Delete Image&quot;, @image, :confirm =&gt; &quot;Are you sure?&quot;, :method =&gt; :delete</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line214">214</a>       #   # =&gt; &lt;a href=&quot;/images/9&quot; onclick=&quot;if (confirm('Are you sure?')) { var f = document.createElement('form');</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line215">215</a>       #        f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line216">216</a>       #        var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method');</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line217">217</a>       #        m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;&quot;&gt;Delete Image&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line218">218</a>       def link_to(*args, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line219">219</a>         if block_given?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line220">220</a>           options      = args.first || {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line221">221</a>           html_options = args.second</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line222">222</a>           concat(link_to(capture(&amp;block), options, html_options))</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line223">223</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line224">224</a>           name         = args.first</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line225">225</a>           options      = args.second || {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line226">226</a>           html_options = args.third</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line227">227</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line228">228</a>           url = url_for(options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line229">229</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line230">230</a>           if html_options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line231">231</a>             html_options = html_options.stringify_keys</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line232">232</a>             href = html_options['href']</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line233">233</a>             convert_options_to_javascript!(html_options, url)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line234">234</a>             tag_options = tag_options(html_options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line235">235</a>           else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line236">236</a>             tag_options = nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line237">237</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line238">238</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line239">239</a>           href_attr = &quot;href=\&quot;#{url}\&quot;&quot; unless href</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line240">240</a>           &quot;&lt;a #{href_attr}#{tag_options}&gt;#{name || url}&lt;/a&gt;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line241">241</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line242">242</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line243">243</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line244">244</a>       # Generates a form containing a single button that submits to the URL created</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line245">245</a>       # by the set of +options+. This is the safest method to ensure links that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line246">246</a>       # cause changes to your data are not triggered by search bots or accelerators.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line247">247</a>       # If the HTML button does not work with your layout, you can also consider</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line248">248</a>       # using the link_to method with the &lt;tt&gt;:method&lt;/tt&gt; modifier as described in</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line249">249</a>       # the link_to documentation.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line250">250</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line251">251</a>       # The generated FORM element has a class name of &lt;tt&gt;button-to&lt;/tt&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line252">252</a>       # to allow styling of the form itself and its children. You can control</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line253">253</a>       # the form submission and input element behavior using +html_options+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line254">254</a>       # This method accepts the &lt;tt&gt;:method&lt;/tt&gt; and &lt;tt&gt;:confirm&lt;/tt&gt; modifiers</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line255">255</a>       # described in the link_to documentation. If no &lt;tt&gt;:method&lt;/tt&gt; modifier</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line256">256</a>       # is given, it will default to performing a POST operation. You can also</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line257">257</a>       # disable the button by passing &lt;tt&gt;:disabled =&gt; true&lt;/tt&gt; in +html_options+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line258">258</a>       # If you are using RESTful routes, you can pass the &lt;tt&gt;:method&lt;/tt&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line259">259</a>       # to change the HTTP verb used to submit the form.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line260">260</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line261">261</a>       # ==== Options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line262">262</a>       # The +options+ hash accepts the same options at url_for.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line263">263</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line264">264</a>       # There are a few special +html_options+:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line265">265</a>       # * &lt;tt&gt;:method&lt;/tt&gt; - Specifies the anchor name to be appended to the path.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line266">266</a>       # * &lt;tt&gt;:disabled&lt;/tt&gt; - Specifies the anchor name to be appended to the path.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line267">267</a>       # * &lt;tt&gt;:confirm&lt;/tt&gt; - This will add a JavaScript confirm</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line268">268</a>       #   prompt with the question specified. If the user accepts, the link is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line269">269</a>       #   processed normally, otherwise no action is taken.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line270">270</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line271">271</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line272">272</a>       #   &lt;%= button_to &quot;New&quot;, :action =&gt; &quot;new&quot; %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line273">273</a>       #   # =&gt; &quot;&lt;form method=&quot;post&quot; action=&quot;/controller/new&quot; class=&quot;button-to&quot;&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line274">274</a>       #   #      &lt;div&gt;&lt;input value=&quot;New&quot; type=&quot;submit&quot; /&gt;&lt;/div&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line275">275</a>       #   #    &lt;/form&gt;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line276">276</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line277">277</a>       #   button_to &quot;Delete Image&quot;, { :action =&gt; &quot;delete&quot;, :id =&gt; @image.id },</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line278">278</a>       #             :confirm =&gt; &quot;Are you sure?&quot;, :method =&gt; :delete</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line279">279</a>       #   # =&gt; &quot;&lt;form method=&quot;post&quot; action=&quot;/images/delete/1&quot; class=&quot;button-to&quot;&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line280">280</a>       #   #      &lt;div&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line281">281</a>       #   #        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;delete&quot; /&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line282">282</a>       #   #        &lt;input onclick=&quot;return confirm('Are you sure?');&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line283">283</a>       #   #              value=&quot;Delete&quot; type=&quot;submit&quot; /&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line284">284</a>       #   #      &lt;/div&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line285">285</a>       #   #    &lt;/form&gt;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line286">286</a>       def button_to(name, options = {}, html_options = {})</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line287">287</a>         html_options = html_options.stringify_keys</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line288">288</a>         convert_boolean_attributes!(html_options, %w( disabled ))</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line289">289</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line290">290</a>         method_tag = ''</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line291">291</a>         if (method = html_options.delete('method')) &amp;&amp; %w{put delete}.include?(method.to_s)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line292">292</a>           method_tag = tag('input', :type =&gt; 'hidden', :name =&gt; '_method', :value =&gt; method.to_s)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line293">293</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line294">294</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line295">295</a>         form_method = method.to_s == 'get' ? 'get' : 'post'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line296">296</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line297">297</a>         request_token_tag = ''</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line298">298</a>         if form_method == 'post' &amp;&amp; protect_against_forgery?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line299">299</a>           request_token_tag = tag(:input, :type =&gt; &quot;hidden&quot;, :name =&gt; request_forgery_protection_token.to_s, :value =&gt; form_authenticity_token)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line300">300</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line301">301</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line302">302</a>         if confirm = html_options.delete(&quot;confirm&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line303">303</a>           html_options[&quot;onclick&quot;] = &quot;return #{confirm_javascript_function(confirm)};&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line304">304</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line305">305</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line306">306</a>         url = options.is_a?(String) ? options : self.url_for(options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line307">307</a>         name ||= url</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line308">308</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line309">309</a>         html_options.merge!(&quot;type&quot; =&gt; &quot;submit&quot;, &quot;value&quot; =&gt; name)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line310">310</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line311">311</a>         &quot;&lt;form method=\&quot;#{form_method}\&quot; action=\&quot;#{escape_once url}\&quot; class=\&quot;button-to\&quot;&gt;&lt;div&gt;&quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line312">312</a>           method_tag + tag(&quot;input&quot;, html_options) + request_token_tag + &quot;&lt;/div&gt;&lt;/form&gt;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line313">313</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line314">314</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line315">315</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line316">316</a>       # Creates a link tag of the given +name+ using a URL created by the set of</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line317">317</a>       # +options+ unless the current request URI is the same as the links, in</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line318">318</a>       # which case only the name is returned (or the given block is yielded, if</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line319">319</a>       # one exists).  You can give link_to_unless_current a block which will</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line320">320</a>       # specialize the default behavior (e.g., show a &quot;Start Here&quot; link rather</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line321">321</a>       # than the link's text).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line322">322</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line323">323</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line324">324</a>       # Let's say you have a navigation menu...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line325">325</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line326">326</a>       #   &lt;ul id=&quot;navbar&quot;&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line327">327</a>       #     &lt;li&gt;&lt;%= link_to_unless_current(&quot;Home&quot;, { :action =&gt; &quot;index&quot; }) %&gt;&lt;/li&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line328">328</a>       #     &lt;li&gt;&lt;%= link_to_unless_current(&quot;About Us&quot;, { :action =&gt; &quot;about&quot; }) %&gt;&lt;/li&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line329">329</a>       #   &lt;/ul&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line330">330</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line331">331</a>       # If in the &quot;about&quot; action, it will render...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line332">332</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line333">333</a>       #   &lt;ul id=&quot;navbar&quot;&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line334">334</a>       #     &lt;li&gt;&lt;a href=&quot;/controller/index&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line335">335</a>       #     &lt;li&gt;About Us&lt;/li&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line336">336</a>       #   &lt;/ul&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line337">337</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line338">338</a>       # ...but if in the &quot;index&quot; action, it will render:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line339">339</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line340">340</a>       #   &lt;ul id=&quot;navbar&quot;&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line341">341</a>       #     &lt;li&gt;Home&lt;/li&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line342">342</a>       #     &lt;li&gt;&lt;a href=&quot;/controller/about&quot;&gt;About Us&lt;/a&gt;&lt;/li&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line343">343</a>       #   &lt;/ul&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line344">344</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line345">345</a>       # The implicit block given to link_to_unless_current is evaluated if the current</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line346">346</a>       # action is the action given.  So, if we had a comments page and wanted to render a</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line347">347</a>       # &quot;Go Back&quot; link instead of a link to the comments page, we could do something like this...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line348">348</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line349">349</a>       #    &lt;%=</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line350">350</a>       #        link_to_unless_current(&quot;Comment&quot;, { :controller =&gt; 'comments', :action =&gt; 'new}) do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line351">351</a>       #           link_to(&quot;Go back&quot;, { :controller =&gt; 'posts', :action =&gt; 'index' })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line352">352</a>       #        end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line353">353</a>       #     %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line354">354</a>       def link_to_unless_current(name, options = {}, html_options = {}, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line355">355</a>         link_to_unless current_page?(options), name, options, html_options, &amp;block</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line356">356</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line357">357</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line358">358</a>       # Creates a link tag of the given +name+ using a URL created by the set of</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line359">359</a>       # +options+ unless +condition+ is true, in which case only the name is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line360">360</a>       # returned. To specialize the default behavior (i.e., show a login link rather</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line361">361</a>       # than just the plaintext link text), you can pass a block that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line362">362</a>       # accepts the name or the full argument list for link_to_unless.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line363">363</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line364">364</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line365">365</a>       #   &lt;%= link_to_unless(@current_user.nil?, &quot;Reply&quot;, { :action =&gt; &quot;reply&quot; }) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line366">366</a>       #   # If the user is logged in...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line367">367</a>       #   # =&gt; &lt;a href=&quot;/controller/reply/&quot;&gt;Reply&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line368">368</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line369">369</a>       #   &lt;%=</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line370">370</a>       #      link_to_unless(@current_user.nil?, &quot;Reply&quot;, { :action =&gt; &quot;reply&quot; }) do |name|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line371">371</a>       #        link_to(name, { :controller =&gt; &quot;accounts&quot;, :action =&gt; &quot;signup&quot; })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line372">372</a>       #      end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line373">373</a>       #   %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line374">374</a>       #   # If the user is logged in...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line375">375</a>       #   # =&gt; &lt;a href=&quot;/controller/reply/&quot;&gt;Reply&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line376">376</a>       #   # If not...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line377">377</a>       #   # =&gt; &lt;a href=&quot;/accounts/signup&quot;&gt;Reply&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line378">378</a>       def link_to_unless(condition, name, options = {}, html_options = {}, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line379">379</a>         if condition</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line380">380</a>           if block_given?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line381">381</a>             block.arity &lt;= 1 ? yield(name) : yield(name, options, html_options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line382">382</a>           else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line383">383</a>             name</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line384">384</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line385">385</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line386">386</a>           link_to(name, options, html_options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line387">387</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line388">388</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line389">389</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line390">390</a>       # Creates a link tag of the given +name+ using a URL created by the set of</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line391">391</a>       # +options+ if +condition+ is true, in which case only the name is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line392">392</a>       # returned. To specialize the default behavior, you can pass a block that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line393">393</a>       # accepts the name or the full argument list for link_to_unless (see the examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line394">394</a>       # in link_to_unless).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line395">395</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line396">396</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line397">397</a>       #   &lt;%= link_to_if(@current_user.nil?, &quot;Login&quot;, { :controller =&gt; &quot;sessions&quot;, :action =&gt; &quot;new&quot; }) %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line398">398</a>       #   # If the user isn't logged in...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line399">399</a>       #   # =&gt; &lt;a href=&quot;/sessions/new/&quot;&gt;Login&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line400">400</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line401">401</a>       #   &lt;%=</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line402">402</a>       #      link_to_if(@current_user.nil?, &quot;Login&quot;, { :controller =&gt; &quot;sessions&quot;, :action =&gt; &quot;new&quot; }) do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line403">403</a>       #        link_to(@current_user.login, { :controller =&gt; &quot;accounts&quot;, :action =&gt; &quot;show&quot;, :id =&gt; @current_user })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line404">404</a>       #      end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line405">405</a>       #   %&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line406">406</a>       #   # If the user isn't logged in...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line407">407</a>       #   # =&gt; &lt;a href=&quot;/sessions/new/&quot;&gt;Login&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line408">408</a>       #   # If they are logged in...</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line409">409</a>       #   # =&gt; &lt;a href=&quot;/accounts/show/3&quot;&gt;my_username&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line410">410</a>       def link_to_if(condition, name, options = {}, html_options = {}, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line411">411</a>         link_to_unless !condition, name, options, html_options, &amp;block</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line412">412</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line413">413</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line414">414</a>       # Creates a mailto link tag to the specified +email_address+, which is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line415">415</a>       # also used as the name of the link unless +name+ is specified. Additional</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line416">416</a>       # HTML attributes for the link can be passed in +html_options+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line417">417</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line418">418</a>       # mail_to has several methods for hindering email harvesters and customizing</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line419">419</a>       # the email itself by passing special keys to +html_options+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line420">420</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line421">421</a>       # ==== Options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line422">422</a>       # * &lt;tt&gt;:encode&lt;/tt&gt;  - This key will accept the strings &quot;javascript&quot; or &quot;hex&quot;.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line423">423</a>       #   Passing &quot;javascript&quot; will dynamically create and encode the mailto: link then</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line424">424</a>       #   eval it into the DOM of the page. This method will not show the link on</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line425">425</a>       #   the page if the user has JavaScript disabled. Passing &quot;hex&quot; will hex</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line426">426</a>       #   encode the +email_address+ before outputting the mailto: link.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line427">427</a>       # * &lt;tt&gt;:replace_at&lt;/tt&gt;  - When the link +name+ isn't provided, the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line428">428</a>       #   +email_address+ is used for the link label. You can use this option to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line429">429</a>       #   obfuscate the +email_address+ by substituting the @ sign with the string</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line430">430</a>       #   given as the value.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line431">431</a>       # * &lt;tt&gt;:replace_dot&lt;/tt&gt;  - When the link +name+ isn't provided, the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line432">432</a>       #   +email_address+ is used for the link label. You can use this option to</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line433">433</a>       #   obfuscate the +email_address+ by substituting the . in the email with the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line434">434</a>       #   string given as the value.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line435">435</a>       # * &lt;tt&gt;:subject&lt;/tt&gt;  - Preset the subject line of the email.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line436">436</a>       # * &lt;tt&gt;:body&lt;/tt&gt; - Preset the body of the email.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line437">437</a>       # * &lt;tt&gt;:cc&lt;/tt&gt;  - Carbon Copy addition recipients on the email.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line438">438</a>       # * &lt;tt&gt;:bcc&lt;/tt&gt;  - Blind Carbon Copy additional recipients on the email.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line439">439</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line440">440</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line441">441</a>       #   mail_to &quot;me@domain.com&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line442">442</a>       #   # =&gt; &lt;a href=&quot;mailto:me@domain.com&quot;&gt;me@domain.com&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line443">443</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line444">444</a>       #   mail_to &quot;me@domain.com&quot;, &quot;My email&quot;, :encode =&gt; &quot;javascript&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line445">445</a>       #   # =&gt; &lt;script type=&quot;text/javascript&quot;&gt;eval(decodeURIComponent('%64%6f%63...%27%29%3b'))&lt;/script&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line446">446</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line447">447</a>       #   mail_to &quot;me@domain.com&quot;, &quot;My email&quot;, :encode =&gt; &quot;hex&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line448">448</a>       #   # =&gt; &lt;a href=&quot;mailto:%6d%65@%64%6f%6d%61%69%6e.%63%6f%6d&quot;&gt;My email&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line449">449</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line450">450</a>       #   mail_to &quot;me@domain.com&quot;, nil, :replace_at =&gt; &quot;_at_&quot;, :replace_dot =&gt; &quot;_dot_&quot;, :class =&gt; &quot;email&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line451">451</a>       #   # =&gt; &lt;a href=&quot;mailto:me@domain.com&quot; class=&quot;email&quot;&gt;me_at_domain_dot_com&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line452">452</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line453">453</a>       #   mail_to &quot;me@domain.com&quot;, &quot;My email&quot;, :cc =&gt; &quot;ccaddress@domain.com&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line454">454</a>       #            :subject =&gt; &quot;This is an example email&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line455">455</a>       #   # =&gt; &lt;a href=&quot;mailto:me@domain.com?cc=ccaddress@domain.com&amp;subject=This%20is%20an%20example%20email&quot;&gt;My email&lt;/a&gt;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line456">456</a>       def mail_to(email_address, name = nil, html_options = {})</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line457">457</a>         html_options = html_options.stringify_keys</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line458">458</a>         encode = html_options.delete(&quot;encode&quot;).to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line459">459</a>         cc, bcc, subject, body = html_options.delete(&quot;cc&quot;), html_options.delete(&quot;bcc&quot;), html_options.delete(&quot;subject&quot;), html_options.delete(&quot;body&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line460">460</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line461">461</a>         string = ''</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line462">462</a>         extras = ''</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line463">463</a>         extras &lt;&lt; &quot;cc=#{CGI.escape(cc).gsub(&quot;+&quot;, &quot;%20&quot;)}&amp;&quot; unless cc.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line464">464</a>         extras &lt;&lt; &quot;bcc=#{CGI.escape(bcc).gsub(&quot;+&quot;, &quot;%20&quot;)}&amp;&quot; unless bcc.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line465">465</a>         extras &lt;&lt; &quot;body=#{CGI.escape(body).gsub(&quot;+&quot;, &quot;%20&quot;)}&amp;&quot; unless body.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line466">466</a>         extras &lt;&lt; &quot;subject=#{CGI.escape(subject).gsub(&quot;+&quot;, &quot;%20&quot;)}&amp;&quot; unless subject.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line467">467</a>         extras = &quot;?&quot; &lt;&lt; extras.gsub!(/&amp;?$/,&quot;&quot;) unless extras.empty?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line468">468</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line469">469</a>         email_address = email_address.to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line470">470</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line471">471</a>         email_address_obfuscated = email_address.dup</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line472">472</a>         email_address_obfuscated.gsub!(/@/, html_options.delete(&quot;replace_at&quot;)) if html_options.has_key?(&quot;replace_at&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line473">473</a>         email_address_obfuscated.gsub!(/\./, html_options.delete(&quot;replace_dot&quot;)) if html_options.has_key?(&quot;replace_dot&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line474">474</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line475">475</a>         if encode == &quot;javascript&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line476">476</a>           &quot;document.write('#{content_tag(&quot;a&quot;, name || email_address_obfuscated, html_options.merge({ &quot;href&quot; =&gt; &quot;mailto:&quot;+email_address+extras }))}');&quot;.each_byte do |c|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line477">477</a>             string &lt;&lt; sprintf(&quot;%%%x&quot;, c)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line478">478</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line479">479</a>           &quot;&lt;script type=\&quot;#{Mime::JS}\&quot;&gt;eval(decodeURIComponent('#{string}'))&lt;/script&gt;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line480">480</a>         elsif encode == &quot;hex&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line481">481</a>           email_address_encoded = ''</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line482">482</a>           email_address_obfuscated.each_byte do |c|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line483">483</a>             email_address_encoded &lt;&lt; sprintf(&quot;&amp;#%d;&quot;, c)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line484">484</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line485">485</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line486">486</a>           protocol = 'mailto:'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line487">487</a>           protocol.each_byte { |c| string &lt;&lt; sprintf(&quot;&amp;#%d;&quot;, c) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line488">488</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line489">489</a>           email_address.each_byte do |c|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line490">490</a>             char = c.chr</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line491">491</a>             string &lt;&lt; (char =~ /\w/ ? sprintf(&quot;%%%x&quot;, c) : char)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line492">492</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line493">493</a>           content_tag &quot;a&quot;, name || email_address_encoded, html_options.merge({ &quot;href&quot; =&gt; &quot;#{string}#{extras}&quot; })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line494">494</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line495">495</a>           content_tag &quot;a&quot;, name || email_address_obfuscated, html_options.merge({ &quot;href&quot; =&gt; &quot;mailto:#{email_address}#{extras}&quot; })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line496">496</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line497">497</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line498">498</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line499">499</a>       # True if the current request URI was generated by the given +options+.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line500">500</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line501">501</a>       # ==== Examples</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line502">502</a>       # Let's say we're in the &lt;tt&gt;/shop/checkout?order=desc&lt;/tt&gt; action.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line503">503</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line504">504</a>       #   current_page?(:action =&gt; 'process')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line505">505</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line506">506</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line507">507</a>       #   current_page?(:controller =&gt; 'shop', :action =&gt; 'checkout')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line508">508</a>       #   # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line509">509</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line510">510</a>       #   current_page?(:controller =&gt; 'shop', :action =&gt; 'checkout', :order =&gt; 'asc')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line511">511</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line512">512</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line513">513</a>       #   current_page?(:action =&gt; 'checkout')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line514">514</a>       #   # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line515">515</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line516">516</a>       #   current_page?(:controller =&gt; 'library', :action =&gt; 'checkout')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line517">517</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line518">518</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line519">519</a>       # Let's say we're in the &lt;tt&gt;/shop/checkout?order=desc&amp;page=1&lt;/tt&gt; action.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line520">520</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line521">521</a>       #   current_page?(:action =&gt; 'process')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line522">522</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line523">523</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line524">524</a>       #   current_page?(:controller =&gt; 'shop', :action =&gt; 'checkout')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line525">525</a>       #   # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line526">526</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line527">527</a>       #   current_page?(:controller =&gt; 'shop', :action =&gt; 'checkout', :order =&gt; 'desc', :page=&gt;'1')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line528">528</a>       #   # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line529">529</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line530">530</a>       #   current_page?(:controller =&gt; 'shop', :action =&gt; 'checkout', :order =&gt; 'desc', :page=&gt;'2')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line531">531</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line532">532</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line533">533</a>       #   current_page?(:controller =&gt; 'shop', :action =&gt; 'checkout', :order =&gt; 'desc')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line534">534</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line535">535</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line536">536</a>       #   current_page?(:action =&gt; 'checkout')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line537">537</a>       #   # =&gt; true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line538">538</a>       #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line539">539</a>       #   current_page?(:controller =&gt; 'library', :action =&gt; 'checkout')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line540">540</a>       #   # =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line541">541</a>       def current_page?(options)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line542">542</a>         url_string = CGI.unescapeHTML(url_for(options))</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line543">543</a>         request = @controller.request</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line544">544</a>         # We ignore any extra parameters in the request_uri if the </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line545">545</a>         # submitted url doesn't have any either.  This lets the function</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line546">546</a>         # work with things like ?order=asc </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line547">547</a>         if url_string.index(&quot;?&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line548">548</a>           request_uri = request.request_uri</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line549">549</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line550">550</a>           request_uri = request.request_uri.split('?').first</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line551">551</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line552">552</a>         if url_string =~ /^\w+:\/\//</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line553">553</a>           url_string == &quot;#{request.protocol}#{request.host_with_port}#{request_uri}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line554">554</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line555">555</a>           url_string == request_uri</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line556">556</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line557">557</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line558">558</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line559">559</a>       private</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line560">560</a>         def convert_options_to_javascript!(html_options, url = '')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line561">561</a>           confirm, popup = html_options.delete(&quot;confirm&quot;), html_options.delete(&quot;popup&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line562">562</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line563">563</a>           method, href = html_options.delete(&quot;method&quot;), html_options['href']</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line564">564</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line565">565</a>           html_options[&quot;onclick&quot;] = case</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line566">566</a>             when popup &amp;&amp; method</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line567">567</a>               raise ActionView::ActionViewError, &quot;You can't use :popup and :method in the same link&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line568">568</a>             when confirm &amp;&amp; popup</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line569">569</a>               &quot;if (#{confirm_javascript_function(confirm)}) { #{popup_javascript_function(popup)} };return false;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line570">570</a>             when confirm &amp;&amp; method</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line571">571</a>               &quot;if (#{confirm_javascript_function(confirm)}) { #{method_javascript_function(method)} };return false;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line572">572</a>             when confirm</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line573">573</a>               &quot;return #{confirm_javascript_function(confirm)};&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line574">574</a>             when method</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line575">575</a>               &quot;#{method_javascript_function(method, url, href)}return false;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line576">576</a>             when popup</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line577">577</a>               &quot;#{popup_javascript_function(popup)}return false;&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line578">578</a>             else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line579">579</a>               html_options[&quot;onclick&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line580">580</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line581">581</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line582">582</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line583">583</a>         def confirm_javascript_function(confirm)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line584">584</a>           &quot;confirm('#{escape_javascript(confirm)}')&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line585">585</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line586">586</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line587">587</a>         def popup_javascript_function(popup)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line588">588</a>           popup.is_a?(Array) ? &quot;window.open(this.href,'#{popup.first}','#{popup.last}');&quot; : &quot;window.open(this.href);&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line589">589</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line590">590</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line591">591</a>         def method_javascript_function(method, url = '', href = nil)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line592">592</a>           action = (href &amp;&amp; url.size &gt; 0) ? &quot;'#{url}'&quot; : 'this.href'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line593">593</a>           submit_function =</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line594">594</a>             &quot;var f = document.createElement('form'); f.style.display = 'none'; &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line595">595</a>             &quot;this.parentNode.appendChild(f); f.method = 'POST'; f.action = #{action};&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line596">596</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line597">597</a>           unless method == :post</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line598">598</a>             submit_function &lt;&lt; &quot;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); &quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line599">599</a>             submit_function &lt;&lt; &quot;m.setAttribute('name', '_method'); m.setAttribute('value', '#{method}'); f.appendChild(m);&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line600">600</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line601">601</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line602">602</a>           if protect_against_forgery?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line603">603</a>             submit_function &lt;&lt; &quot;var s = document.createElement('input'); s.setAttribute('type', 'hidden'); &quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line604">604</a>             submit_function &lt;&lt; &quot;s.setAttribute('name', '#{request_forgery_protection_token}'); s.setAttribute('value', '#{escape_javascript form_authenticity_token}'); f.appendChild(s);&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line605">605</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line606">606</a>           submit_function &lt;&lt; &quot;f.submit();&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line607">607</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line608">608</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line609">609</a>         # Processes the _html_options_ hash, converting the boolean</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line610">610</a>         # attributes from true/false form into the form required by</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line611">611</a>         # HTML/XHTML.  (An attribute is considered to be boolean if</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line612">612</a>         # its name is listed in the given _bool_attrs_ array.)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line613">613</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line614">614</a>         # More specifically, for each boolean attribute in _html_options_</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line615">615</a>         # given as:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line616">616</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line617">617</a>         #     &quot;attr&quot; =&gt; bool_value</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line618">618</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line619">619</a>         # if the associated _bool_value_ evaluates to true, it is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line620">620</a>         # replaced with the attribute's name; otherwise the attribute is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line621">621</a>         # removed from the _html_options_ hash.  (See the XHTML 1.0 spec,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line622">622</a>         # section 4.5 &quot;Attribute Minimization&quot; for more:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line623">623</a>         # http://www.w3.org/TR/xhtml1/#h-4.5)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line624">624</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line625">625</a>         # Returns the updated _html_options_ hash, which is also modified</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line626">626</a>         # in place.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line627">627</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line628">628</a>         # Example:</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line629">629</a>         #</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line630">630</a>         #   convert_boolean_attributes!( html_options,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line631">631</a>         #                                %w( checked disabled readonly ) )</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line632">632</a>         def convert_boolean_attributes!(html_options, bool_attrs)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line633">633</a>           bool_attrs.each { |x| html_options[x] = x if html_options.delete(x) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line634">634</a>           html_options</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line635">635</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line636">636</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line637">637</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line638">638</a> end</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+
+    <p>Generated on Sat Oct 10 16:43:25 -0400 2009 with <a href="http://github.com/relevance/rcov">rcov 0.9.3</a></p>
+
+  </body>
+</html>
