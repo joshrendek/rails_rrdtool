@@ -43,6 +43,7 @@ class RRD
   # :ds is an array containing hashes for each DataSource (DS) type in the db
   # :xff is the x files factor (see RRD website for more info on this), range is acceptable between 0 and 1
   # :rra is a array containing hashes with RRA types and corresponding values
+  # :rra_hwpd is a hwpredict values
   def self.create(path,params,rrdpath="rrdtool")
     
 	puts "Creating RRD graph"
@@ -58,6 +59,14 @@ class RRD
       for r in params[:rra]
         cmd << "RRA:#{r[:type].upcase}:#{xff}:#{self.sanitize(r[:steps], 'num')}:#{self.sanitize(r[:rows], 'num')} "
       end
+      
+      # hwpredict    RRA:HWPREDICT:1440:0.1:0.0035:288
+      # # RRA:HWPREDICT:rows:alpha:beta:seasonal period[:rra-num]
+      
+      for r in params[:rra_hwpd]
+        cmd << "RRA:#{r[:type].upcase}:#{r[:rows]}:#{r[:alpha]}:#{r[:beta]}:#{r[:period]} "
+      end
+      
     rescue RuntimeError => e
       puts "RRD failed to create: #{e}"
     else
