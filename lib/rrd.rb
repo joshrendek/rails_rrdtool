@@ -1,3 +1,4 @@
+require 'date'
 class RRD
   def self.test
 	puts "test"
@@ -125,7 +126,7 @@ class RRD
 
     begin
       cmd = "#{rrdpath} graph #{self.sanitize(image_path, 'path')} "
-      cmd << "-s #{self.sanitize(params[:ago].tv_sec, 'num')} "
+      cmd << "-s #{self.sanitize(params[:ago], 'alphanum')} "
       cmd << "-w #{self.sanitize(params[:width], 'num')} -h #{self.sanitize(params[:height], 'num')} "
       cmd << "-a #{self.sanitize(params[:image_type], 'imagetype')} "
       cmd << "-t '#{self.sanitize(params[:title], 'alphanum')}' "

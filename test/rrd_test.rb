@@ -1,4 +1,5 @@
-require 'test_helper'
+require 'test/unit'
+require './lib/rrd'
 
 class RrdTest < Test::Unit::TestCase
 
