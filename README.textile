@@ -2,52 +2,20 @@ h2. What is it?
 
 I couldn't find anything up to date that worked on rails that was paranoid about escaping and protecting the shell so I wrote my own.
 
-I'm actively using this on my project called Servly.
+I'm actively using this on projects at work.
 
 h2. Notes
 
 You can call 'live' RRD graphs (ie when a page loads, have an Ajax.Updater load another page that actually graphs the RRd you want)
 This works fine under my tests with graphing about 7 RRD's at the same time.
 
-h2. Todo
-
-Actually write some tests...
-
 h2. Installing rails_rrdtool
-
-cd vendor/plugins && git clone git://github.com/bluescripts/rails_rrdtool.git rails_rrdtool
-
-If you intend on using this in your rails app you need to (or should) put these inside your application_controller.rb file
 <pre>
-	# path to RRD tool in your environment.... /opt/local/bin is for MAC OSX ports
-	def rrd_tool
-	    if RAILS_ENV=="development"
-	      return "/opt/local/bin/rrdtool"
-	    else
-	      return "rrdtool"
-	    end
-	  end
-	  # the path to your RRD store (if your app was in /home/app it would go to /home/app/rrd/)
-	  def rrd_path
-	      return  Dir.pwd << "/rrd/"
-	  end
-	  
-	  # the path to your RRD images 
-	  def rrd_image_path
-	      return  Dir.pwd << "/public/rrd/"
-	  end
-	  
-	  # the web path to your RRD images
-	  def rrd_image_url
-	    if RAILS_ENV=="development"
-	      return "/rrd/"
-	    else
-	      return "/rrd/"
-	    end
-	   end
+gem install RailsRRDTool
 </pre>
 
 h2. Creating a RRD
+
 
 RRD.create(path,params)
 
@@ -90,7 +58,7 @@ h2. Graphing a RRD
 example usage:
 <pre>
 
- RRD.graph('/test/path.rrd','/test/path.png', {:ago => Time.now.advance(:hours => -12),
+ RRD.graph('/test/path.rrd','/test/path.png', {:ago => Time.now.to_i-(60*60*12),
  :width => 500, :height => 200, :image_type => "PNG", :title => "Memory 12hr test",
  :defs => [ {:key => "free", :type => "AVERAGE", :rpn => "AREA", :color => "C32227",
  :title => "Free Memory" }, {:key => "used", :type => "AVERAGE", :rpn => "AREA", :color => "932D0C",
