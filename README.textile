@@ -10,9 +10,7 @@ You can call 'live' RRD graphs (ie when a page loads, have an Ajax.Updater load 
 This works fine under my tests with graphing about 7 RRD's at the same time.
 
 h2. Installing rails_rrdtool
-<pre>
-gem install RailsRRDTool
-</pre>
+<pre>gem install RailsRRDTool</pre>
 
 h2. Creating a RRD
 
