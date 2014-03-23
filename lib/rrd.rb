@@ -63,9 +63,10 @@ class RRD
       
       # hwpredict    RRA:HWPREDICT:1440:0.1:0.0035:288
       # # RRA:HWPREDICT:rows:alpha:beta:seasonal period[:rra-num]
-      
-      for r in params[:rra_hwpd]
-        cmd << "RRA:#{r[:type].upcase}:#{r[:rows]}:#{r[:alpha]}:#{r[:beta]}:#{r[:period]} "
+      if params[:rra_hwpd]
+        for r in params[:rra_hwpd]
+          cmd << "RRA:#{r[:type].upcase}:#{r[:rows]}:#{r[:alpha]}:#{r[:beta]}:#{r[:period]} "
+        end
       end
       
     rescue RuntimeError => e
